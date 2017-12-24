@@ -12,7 +12,7 @@
         android:ems="17"
         android:inputType="textEmailAddress"
         android:layout_marginTop="50dp"
-        android:hint="@string/email"
+        android:hint="Email"
         android:textSize="20sp"
         />
 
