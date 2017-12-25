@@ -20,15 +20,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
-    public void comment(View view)
-    {
+
+    public void comment(View view) {
+
         setContentView(R.layout.sign_in);
     }
 
-    public void signin(View view) {
-        Toast toast=Toast.makeText(getApplicationContext(),"Successfully created",Toast.LENGTH_LONG);
-        toast.show();
+
+    public void signup(View view) {
+        setContentView(R.layout.sign_up);
     }
 
-
+    public void signupbutton(View view) {
+        Toast toast=Toast.makeText(getApplicationContext(),"Succecsfully created",Toast.LENGTH_LONG);
+        toast.show();
+    }
 }

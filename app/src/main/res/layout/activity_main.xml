@@ -59,7 +59,8 @@
             android:layout_marginTop="30dp"
             android:text="Create an account"
             android:textAppearance="@style/TextAppearance.AppCompat"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:onClick="signup"/>
     </RelativeLayout>
 
 

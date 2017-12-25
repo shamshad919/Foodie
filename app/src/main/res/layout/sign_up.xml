@@ -26,15 +26,27 @@
         android:hint="Password"
         android:textSize="20sp"
         />
+    <EditText
+        android:id="@+id/repassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="17"
+        android:layout_below="@+id/password"
+        android:inputType="numberPassword"
+        android:layout_marginTop="50dp"
+        android:hint="Re-enterpassword"
+        android:textSize="20sp"
+        />
 
     <Button
         android:id="@+id/signup"
         style="@android:style/Widget.DeviceDefault.Light.Button.Inset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/password"
+        android:layout_below="@+id/repassword"
         android:layout_centerInParent="true"
         android:layout_marginTop="50dp"
-        android:text="Sign up" />
+        android:text="Sign up"
+        android:onClick="signupbutton"/>
 
 </RelativeLayout>
