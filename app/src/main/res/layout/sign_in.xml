@@ -15,6 +15,7 @@
         android:background="#11000000"
         android:drawableLeft="@drawable/ic_action_user"
         android:ems="12"
+        android:textColor="@color/White"
         android:hint="Email"
         android:inputType="textEmailAddress"
         android:textColorHint="#FFFFFF" />
@@ -29,17 +30,32 @@
         android:drawableLeft="@drawable/ic_action_pass"
         android:ems="12"
         android:hint="Password"
+        android:background="#11000000"
+        android:textColor="@color/White"
         android:inputType="textPassword"
         android:textColorHint="#FFFFFF" />
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="35dp"
         android:layout_below="@+id/editText"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="39dp"
+        android:background="@color/colorPrimary"
         android:text="Login"
-        android:textAllCaps="false" />
+        android:onClick="signin"
+        android:textAllCaps="false"
+        android:textColor="@color/White" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="26dp"
+        android:textColor="@color/White"
+        android:text="Not a member?Sign up now." />
 
 </RelativeLayout>

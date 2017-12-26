@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import static android.R.attr.name;
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
-import static com.example.shamshad.foodorder.R.id.user_name;
+
 
 public class MainActivity extends AppCompatActivity {
 
