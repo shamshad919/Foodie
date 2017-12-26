@@ -1,6 +1,7 @@
 package com.example.shamshad.foodorder;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -20,16 +21,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
-
-    public void comment(View view) {
-
-        setContentView(R.layout.sign_in);
+    public void signin(View view) {
+        Intent intent = new Intent(getApplicationContext(), sign_in.class);
+        startActivity(intent);
     }
-
 
     public void signup(View view) {
-        setContentView(R.layout.sign_up);
+        Intent intent=new Intent(getApplicationContext(),sign_up.class);
+        startActivity(intent);
     }
+
 
 
 }

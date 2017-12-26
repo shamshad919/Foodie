@@ -1,5 +1,6 @@
 package com.example.shamshad.foodorder;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -16,7 +17,12 @@ public class sign_in extends AppCompatActivity {
     }
 
     public void signin(View view) {
-        Toast toast=Toast.makeText(getApplicationContext(),"Created successfully", Toast.LENGTH_LONG);
-        toast .show();
+        Toast t=Toast.makeText(getApplicationContext(),"Created successfully", Toast.LENGTH_LONG);
+        t .show();
+    }
+
+    public void signup(View view) {
+        Intent intent=new Intent(getApplicationContext(),sign_up.class);
+        startActivity(intent);
     }
 }
