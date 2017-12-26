@@ -1,67 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient">
 
-    <TextView
-        android:id="@+id/username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="160dp"
-        android:paddingLeft="15dp"
-        android:text="Username"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="24sp" />
 
     <EditText
-        android:id="@+id/user_name"
+        android:id="@+id/Email"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/username"
-        android:layout_marginLeft=  "30dp"
-        android:layout_toEndOf="@+id/username"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:onClick="color"
-        android:hint="Username"
-        android:textColor="@android:color/darker_gray" />
-
-    <TextView
-        android:id="@+id/password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/username"
-        android:layout_marginTop="50dp"
-        android:elevation="0dp"
-        android:paddingLeft="20dp"
-        android:text="Password"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="24sp"
-        tools:visibility="visible" />
-
-    <EditText
-        android:id="@+id/pass_word"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/password"
-        android:ems="10"
-        android:hint="Password"
-        android:layout_toEndOf="@+id/password"
-        android:layout_alignBaseline="@+id/password"
-        android:layout_marginLeft="30dp"
-        android:inputType="numberPassword"
-        />
-
-    <Button
-        android:id="@+id/sign_in2"
-        style="@android:style/Widget.Button.Inset"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/password"
+        android:layout_height="20dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_marginTop="60dp"
-        android:text="Sign in"/>
+        android:ems="10"
+        android:inputType="textEmailAddress" />
 </RelativeLayout>
