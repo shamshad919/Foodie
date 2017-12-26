@@ -31,8 +31,5 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.sign_up);
     }
 
-    public void signupbutton(View view) {
-        Toast toast=Toast.makeText(getApplicationContext(),"Succecsfully created",Toast.LENGTH_LONG);
-        toast.show();
-    }
+
 }
