@@ -45,7 +45,7 @@
             android:layout_marginTop="60dp"
             android:background="@color/colorPrimary"
             android:elevation="0dp"
-            android:onClick="comment"
+            android:onClick="signin"
             android:text="Sign in"
             android:textAllCaps="false"
             android:textSize="25sp" />
@@ -59,7 +59,8 @@
             android:layout_marginTop="30dp"
             android:text="Create an account"
             android:textAppearance="@style/TextAppearance.AppCompat"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:onClick="signup"/>
     </RelativeLayout>
 
 
