@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
@@ -17,8 +18,9 @@ public class sign_in extends AppCompatActivity {
     }
 
     public void signin(View view) {
-        Toast t=Toast.makeText(getApplicationContext(),"Created successfully", Toast.LENGTH_LONG);
-        t .show();
+        Intent intent=new Intent(getApplicationContext(),foodlist.class);
+        startActivity(intent);
+
     }
 
     public void signup(View view) {
