@@ -25,4 +25,7 @@ public class sign_in extends AppCompatActivity {
         Intent intent=new Intent(getApplicationContext(),sign_up.class);
         startActivity(intent);
     }
+    public void dif(){
+        int i=0;
+    }
 }
