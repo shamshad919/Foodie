@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/gradient"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
@@ -21,7 +22,7 @@
             android:text="LIME STONE"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/Beige"
             android:textSize="50sp"
             android:textStyle="bold" />
 
@@ -31,7 +32,7 @@
             android:layout_height="wrap_content"
             android:text="Online Food Order App"
             android:textSize="25sp"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/Yellow"
             android:layout_below="@+id/limestone"
             android:layout_centerHorizontal="true" />
 
@@ -59,7 +60,7 @@
             android:text="Create an account"
             android:textAppearance="@style/TextAppearance.AppCompat"
             android:textSize="20sp"
-            android:onClick="signup" />
+            android:textColor="@color/White"/>
     </RelativeLayout>
 
 

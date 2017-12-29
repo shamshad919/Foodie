@@ -79,6 +79,7 @@ public class sign_in extends AppCompatActivity  implements View.OnClickListener{
                 progressDialog.dismiss();
                 if(task.isSuccessful()){
                     Toast.makeText(sign_in.this, "Login Successfully", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(sign_in.this,foodlist.class));
                 }
                 if(!task.isSuccessful()){
                     Toast.makeText(sign_in.this, "Login Failed", Toast.LENGTH_SHORT).show();
