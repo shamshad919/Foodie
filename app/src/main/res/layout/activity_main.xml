@@ -33,10 +33,10 @@
             android:textSize="25sp"
             android:textColor="@color/colorAccent"
             android:layout_below="@+id/limestone"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/signin_main"
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -45,22 +45,21 @@
             android:layout_marginTop="60dp"
             android:background="@color/colorPrimary"
             android:elevation="0dp"
-            android:onClick="signin"
             android:text="Sign in"
             android:textAllCaps="false"
             android:textSize="25sp" />
 
         <TextView
-            android:id="@+id/create_account"
+            android:id="@+id/signup_main"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/button"
+            android:layout_below="@+id/signin_main"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:text="Create an account"
             android:textAppearance="@style/TextAppearance.AppCompat"
             android:textSize="20sp"
-            android:onClick="signup"/>
+            android:onClick="signup" />
     </RelativeLayout>
 
 

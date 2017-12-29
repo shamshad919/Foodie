@@ -18,7 +18,6 @@
         </activity>
         <activity android:name=".sign_in" />
         <activity android:name=".sign_up"></activity>
-        <activity android:name=".foodlist" />
     </application>
 
 </manifest>

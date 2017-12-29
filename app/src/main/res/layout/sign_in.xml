@@ -8,28 +8,28 @@
     tools:context="com.example.shamshad.foodorder.sign_in">
 
     <EditText
-        android:id="@+id/Email"
+        android:id="@+id/email_signin"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:background="#11000000"
         android:drawableLeft="@drawable/ic_action_user"
-        android:ems="12"
+        android:ems="13"
         android:textColor="@color/White"
         android:hint="Email"
         android:inputType="textEmailAddress"
         android:textColorHint="#FFFFFF" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/password_signin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/Email"
+        android:layout_below="@+id/email_signin"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
         android:drawableLeft="@drawable/ic_action_pass"
-        android:ems="12"
+        android:ems="13"
         android:hint="Password"
         android:background="#11000000"
         android:textColor="@color/White"
@@ -37,15 +37,14 @@
         android:textColorHint="#FFFFFF" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/signin1"
         android:layout_width="80dp"
         android:layout_height="35dp"
-        android:layout_below="@+id/editText"
+        android:layout_below="@+id/password_signin"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="39dp"
         android:background="@color/colorPrimary"
-        android:text="Login"
-        android:onClick="signin"
+        android:text="Sign in"
         android:textAllCaps="false"
         android:textColor="@color/White" />
 
@@ -53,10 +52,9 @@
         android:id="@+id/create_signin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/button2"
+        android:layout_below="@+id/signin1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="26dp"
-        android:onClick="signup"
         android:textColor="@color/White"
         android:text="Not a member?Sign up now." />
 
