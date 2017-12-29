@@ -13,13 +13,33 @@
         tools:layout_editor_absoluteY="8dp"
         tools:layout_editor_absoluteX="8dp">
 
+        <LinearLayout
+            android:id="@+id/linear_main"
+            android:layout_marginTop="90dp"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginBottom="27dp"
+                app:srcCompat="@drawable/logo"
+                android:layout_above="@+id/limestone"
+                android:layout_centerHorizontal="true" />
+        </LinearLayout>
+
+
         <TextView
             android:id="@+id/limestone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerInParent="true"
-            android:text="foody"
+            android:text="Foody"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/linear_main"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat"
             android:textColor="@color/Beige"
@@ -30,7 +50,7 @@
             android:id="@+id/foodorder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="just a better delivery service"
+            android:text="Just a better delivery service"
             android:textSize="25sp"
             android:textColor="@color/Yellow"
             android:layout_below="@+id/limestone"
@@ -61,6 +81,8 @@
             android:textAppearance="@style/TextAppearance.AppCompat"
             android:textSize="20sp"
             android:textColor="@color/White"/>
+
+
     </RelativeLayout>
 
 
