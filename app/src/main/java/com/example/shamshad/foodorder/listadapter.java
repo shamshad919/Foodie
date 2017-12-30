@@ -12,6 +12,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
+
 
 /**
  * Created by Zoro on 28-Dec-17.
@@ -45,5 +47,13 @@ public class listadapter extends ArrayAdapter<String>{
         restaurantname.setText(stores[position]);
         photo.setImageResource(images[position]);
         return newview;
+    }
+    class viewHolder{
+        TextView storename;
+        ImageView storeimages;
+        viewHolder(View v){
+            storename=(TextView)v.findViewById(R.id.restaurant_name);
+            storeimages=(ImageView) v.findViewById(R.id.imagesRestaurant);
+        }
     }
 }
