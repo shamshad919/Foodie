@@ -1,5 +1,6 @@
 package com.example.shamshad.foodorder;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -19,10 +20,16 @@ import android.widget.TextView;
 public class listadapter extends ArrayAdapter<String>{
 
 
+    private String [] stores;
+    private Integer[] images;
+    private Activity context;
 
-
-    public listadapter(@NonNull Context context, String[] stores) {
+    public listadapter(Activity context, String[] stores,Integer[] images) {
         super(context,R.layout.listrow,stores);
+
+        this.context=context;
+        this.stores=stores;
+        this.images=images;
     }
 
     @NonNull
@@ -31,12 +38,12 @@ public class listadapter extends ArrayAdapter<String>{
         LayoutInflater foodinflater=LayoutInflater.from(getContext());
         View newview=foodinflater.inflate(R.layout.listrow,parent,false);
 
-        String restaurant=getItem(position);
-        TextView restaurantname=(TextView) newview.findViewById(R.id.restaurant_name);
-        ImageView photo=(ImageView)newview.findViewById(R.id.girlpic);
 
-        restaurantname.setText(restaurant);
-        photo.setImageResource(R.drawable.b6eb5c90231c8aecb1cc75e4f11adbaa);
+        TextView restaurantname=(TextView) newview.findViewById(R.id.restaurant_name);
+        ImageView photo=(ImageView)newview.findViewById(R.id.imagesRestaurant);
+
+        restaurantname.setText(stores[position]);
+        photo.setImageResource(images[position]);
         return newview;
     }
 }
