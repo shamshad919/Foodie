@@ -93,6 +93,10 @@ public class sign_up extends AppCompatActivity implements View.OnClickListener {
             Toast.makeText(this, "Enter the confirm password", Toast.LENGTH_SHORT).show();
             return;
         }
+        if(password!=re_password){
+            Toast.makeText(this, "Password is not match", Toast.LENGTH_SHORT).show();
+            return;
+        }
         progressDialog.setMessage("Registering.....");
         progressDialog.show();
 

@@ -12,6 +12,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 
 
@@ -48,12 +51,5 @@ public class listadapter extends ArrayAdapter<String>{
         photo.setImageResource(images[position]);
         return newview;
     }
-    class viewHolder{
-        TextView storename;
-        ImageView storeimages;
-        viewHolder(View v){
-            storename=(TextView)v.findViewById(R.id.restaurant_name);
-            storeimages=(ImageView) v.findViewById(R.id.imagesRestaurant);
-        }
-    }
+
 }

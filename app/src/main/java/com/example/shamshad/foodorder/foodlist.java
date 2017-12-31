@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 /**
  * Created by Zoro on 27-Dec-17.
  */
@@ -18,6 +21,8 @@ public class foodlist extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.foodlist);
+
+
 
         /*ListAdapter storeAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, stores);*/
         ListAdapter storeAdapter = new listadapter(this,stores,images);
