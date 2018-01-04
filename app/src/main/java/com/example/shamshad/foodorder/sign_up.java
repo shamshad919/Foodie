@@ -21,6 +21,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 
@@ -38,12 +40,14 @@ public class sign_up extends AppCompatActivity implements View.OnClickListener {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
+    DatabaseReference myref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up);
 
-        progressDialog=new ProgressDialog(this);
+        progressDialog = new ProgressDialog(this);
 
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -66,15 +70,11 @@ public class sign_up extends AppCompatActivity implements View.OnClickListener {
 
     }
 
-    public void signin_signup(View view) {
-        Intent intent = new Intent(getApplicationContext(), sign_in.class);
-        startActivity(intent);
-    }
 
     public void registerUser() {
-        String name = editTextName.getText().toString().trim();
-        String email = editTextEmail.getText().toString().trim();
-        String password = editTextPassword.getText().toString().trim();
+        final String name = editTextName.getText().toString().trim();
+        final String email = editTextEmail.getText().toString().trim();
+        final String password = editTextPassword.getText().toString().trim();
         String re_password = editTextRe_password.getText().toString().trim();
 
         if (TextUtils.isEmpty(name)) {
@@ -93,7 +93,7 @@ public class sign_up extends AppCompatActivity implements View.OnClickListener {
             Toast.makeText(this, "Enter the confirm password", Toast.LENGTH_SHORT).show();
             return;
         }
-        if(password!=re_password){
+        if (!password.equals(re_password)) {
             Toast.makeText(this, "Password is not match", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -109,33 +109,29 @@ public class sign_up extends AppCompatActivity implements View.OnClickListener {
                         if (!task.isSuccessful()) {
                             Toast.makeText(sign_up.this, "Registration not Completed",
                                     Toast.LENGTH_SHORT).show();
+
                         }
                         //if Registration is completed then Toast will work
                         if (task.isSuccessful()) {
                             Toast.makeText(sign_up.this, "Registration Completed",
                                     Toast.LENGTH_SHORT).show();
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            if (user != null) {
+                                String uid = user.getUid();
+                                // Write a message to the database
+                                User u=new User(editTextEmail.getText().toString(),editTextName.getText().toString(),editTextPassword.getText().toString());
+                                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                DatabaseReference myRef = database.getReference("user").child(uid);
+                                myRef.setValue(u);
+                            }
+
+
                         }
 
                     }
                 });
 
     }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (mAuthListener != null) {
-            mAuth.removeAuthStateListener(mAuthListener);
-        }
-
-    }
-
     @Override
     public void onClick(View v) {
         if (v == signup) {
