@@ -54,6 +54,7 @@
             android:textSize="25sp"
             android:textColor="@color/Yellow"
             android:layout_below="@+id/limestone"
+            android:gravity="center"
             android:layout_centerHorizontal="true" />
 
         <Button

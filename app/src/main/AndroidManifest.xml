@@ -17,8 +17,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".sign_in" />
-        <activity android:name=".sign_up"></activity>.
-        <activity android:name=".foodlist"/>
+        <activity android:name=".sign_up" />
+        .
+        <activity android:name=".restaurant"></activity>
     </application>
 
 </manifest>
