@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "755636454656",
+    "firebase_url": "https://lime-stone-b9d83.firebaseio.com",
+    "project_id": "lime-stone-b9d83",
+    "storage_bucket": "lime-stone-b9d83.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:755636454656:android:f9d8747c3a87b6fb",
+        "android_client_info": {
+          "package_name": "com.example.shamshad.foodorder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "755636454656-g9k1maiv77u883v5lv9mbvpoealtbns7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.shamshad.foodorder",
+            "certificate_hash": "06df1b8fd35221688026ce19493160f66cbfc1f8"
+          }
+        },
+        {
+          "client_id": "755636454656-t87q1nim3o6qpcsjn7erkmcrr7lusnsa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsRU6S6J9sYO05M_l_Mvj4e7NUiMwTy24"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "755636454656-t87q1nim3o6qpcsjn7erkmcrr7lusnsa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
