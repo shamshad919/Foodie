@@ -33,6 +33,8 @@ public class restaurant extends AppCompatActivity {
             protected void populateViewHolder(final restaurantviewHolder viewHolder, restaurant_details model, int position) {
                 viewHolder.textView.setText(model.name);
                 Picasso.with(restaurant.this).load(model.image).into(viewHolder.imageView);
+
+                
             }
         };
         recyclerView.setAdapter(firebaseRecyclerAdapter);
