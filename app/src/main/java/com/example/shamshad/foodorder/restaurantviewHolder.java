@@ -17,12 +17,13 @@ public class restaurantviewHolder extends RecyclerView.ViewHolder implements Vie
     TextView textView;
     ImageView imageView;
     Context mcontext;
+    TextView rating;
 
     public restaurantviewHolder(View itemView) {
         super(itemView);
         textView=(TextView) itemView.findViewById(R.id.restaurant_textview);
         imageView=(ImageView)itemView.findViewById(R.id.restaurant_imageview);
-
+        rating=(TextView)itemView.findViewById(R.id.rating_restaurant);
         mcontext=itemView.getContext();
         itemView.setOnClickListener(this);
     }

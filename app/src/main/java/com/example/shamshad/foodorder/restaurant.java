@@ -35,6 +35,7 @@ public class restaurant extends AppCompatActivity {
             protected void populateViewHolder(final restaurantviewHolder viewHolder, restaurant_details model, int position) {
                 viewHolder.textView.setText(model.name);
                 Glide.with(restaurant.this).load(model.image).into(viewHolder.imageView);
+                viewHolder.rating.setText(model.rating);
 
                 
             }
