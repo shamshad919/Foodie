@@ -5,10 +5,20 @@ package com.example.shamshad.foodorder;
 public class food_details {
     String text;
     String image;
+    String foodid;
 
-    public food_details(String text, String image) {
+    public food_details(String text, String image, String foodid) {
         this.text = text;
         this.image = image;
+        this.foodid = foodid;
+    }
+
+    public String getFoodid() {
+        return foodid;
+    }
+
+    public void setFoodid(String foodid) {
+        this.foodid = foodid;
     }
 
     public String getText() {
