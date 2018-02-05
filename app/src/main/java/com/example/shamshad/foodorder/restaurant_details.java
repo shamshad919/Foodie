@@ -1,8 +1,6 @@
 package com.example.shamshad.foodorder;
 
-/**
- * Created by shamshad on 16/1/18.
- */
+
 
 public class restaurant_details {
      String name;

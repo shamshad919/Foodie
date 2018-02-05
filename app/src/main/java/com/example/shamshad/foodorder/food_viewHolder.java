@@ -8,9 +8,7 @@ import android.widget.TextView;
 
 import com.example.shamshad.foodorder.R;
 
-/**
- * Created by shamshad on 16/1/18.
- */
+
 
 public class food_viewHolder extends RecyclerView.ViewHolder{
     TextView textView;

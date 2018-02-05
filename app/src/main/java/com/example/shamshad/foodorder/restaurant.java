@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -20,9 +21,10 @@ public class restaurant extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.restaurant);
 
+
         recyclerView= (RecyclerView) findViewById(R.id.recycler_restaurant);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
+        recyclerView.setHasFixedSize(true);
         mRef= FirebaseDatabase.getInstance().getReference("restaurants");
 
         FirebaseRecyclerAdapter<restaurant_details,restaurantviewHolder> firebaseRecyclerAdapter=new FirebaseRecyclerAdapter<restaurant_details, restaurantviewHolder>(restaurant_details.class,
@@ -32,7 +34,7 @@ public class restaurant extends AppCompatActivity {
             @Override
             protected void populateViewHolder(final restaurantviewHolder viewHolder, restaurant_details model, int position) {
                 viewHolder.textView.setText(model.name);
-                Picasso.with(restaurant.this).load(model.image).into(viewHolder.imageView);
+                Glide.with(restaurant.this).load(model.image).into(viewHolder.imageView);
 
                 
             }

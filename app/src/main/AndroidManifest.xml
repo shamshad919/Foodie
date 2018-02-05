@@ -21,7 +21,6 @@
         </activity>
         <activity android:name=".sign_in" />
         <activity android:name=".sign_up" />
-
         <activity android:name=".restaurant" />
         <activity android:name=".foodList"></activity>
     </application>
