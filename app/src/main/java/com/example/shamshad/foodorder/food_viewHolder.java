@@ -13,11 +13,13 @@ import com.example.shamshad.foodorder.R;
 public class food_viewHolder extends RecyclerView.ViewHolder{
     TextView textView;
     ImageView imageView;
+    TextView priceview;
 
     public food_viewHolder(View itemView) {
         super(itemView);
         textView=(TextView) itemView.findViewById(R.id.food_textview);
         imageView=(ImageView)itemView.findViewById(R.id.food_imageview);
+        priceview=(TextView)itemView.findViewById(R.id.food_price);
     }
 
 }

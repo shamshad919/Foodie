@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.example.shamshad.foodorder.R;
 
+import static android.R.attr.id;
+
 
 public class restaurantviewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
     TextView textView;
@@ -20,6 +22,7 @@ public class restaurantviewHolder extends RecyclerView.ViewHolder implements Vie
         super(itemView);
         textView=(TextView) itemView.findViewById(R.id.restaurant_textview);
         imageView=(ImageView)itemView.findViewById(R.id.restaurant_imageview);
+
         mcontext=itemView.getContext();
         itemView.setOnClickListener(this);
     }

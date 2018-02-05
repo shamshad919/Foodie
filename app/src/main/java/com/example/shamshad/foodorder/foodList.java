@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -43,9 +44,9 @@ public class foodList extends AppCompatActivity{
                 mRef) {
             @Override
             protected void populateViewHolder(final food_viewHolder viewHolder, food_details model, int position) {
-
-                viewHolder.textView.setText(model.text);
-                Glide.with(foodList.this).load(model.image).into(viewHolder.imageView);
+                viewHolder.priceview.setText("Price:$"+model.getPrice());
+                viewHolder.textView.setText(model.getText());
+                Glide.with(foodList.this).load(model.getImage()).into(viewHolder.imageView);
             }
         };
         recyclerView.setAdapter(firebaseRecyclerAdapter);
