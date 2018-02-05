@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -18,6 +21,7 @@ public class foodList extends AppCompatActivity{
 
     private RecyclerView recyclerView;
     private DatabaseReference mRef;
+    Button quantity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,9 +36,11 @@ public class foodList extends AppCompatActivity{
             childname =(String) b.getString("resname");
         }
 
+
         recyclerView= (RecyclerView) findViewById(R.id.recycler_foodview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
 
         mRef= FirebaseDatabase.getInstance().getReference("restaurants").child(childname).child("foodlist");
        
@@ -51,4 +57,7 @@ public class foodList extends AppCompatActivity{
         };
         recyclerView.setAdapter(firebaseRecyclerAdapter);
     }
+    public void quantity(View view){
+        quantity= (Button) findViewById(R.id.quantity_button);
+        quantity.setText("ADDED");}
 }

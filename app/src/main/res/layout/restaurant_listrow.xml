@@ -21,6 +21,7 @@
            android:layout_height="wrap_content"
            android:layout_gravity="left"
            android:text="Android"
+           android:textColor="@color/Black"
            android:paddingLeft="10dp"
            android:textSize="23sp"
            android:layout_centerVertical="true" />
@@ -28,6 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="4"
+            android:textColor="@color/Black"
             android:textSize="15sp"
             android:id="@+id/rating_restaurant"
             android:layout_alignTop="@+id/imageView5"
