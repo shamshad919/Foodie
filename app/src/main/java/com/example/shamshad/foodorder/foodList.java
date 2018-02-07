@@ -64,12 +64,17 @@ public class foodList extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
+                viewHolder.quantity.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        quantity=(Button)v;
+                        ((Button) v).setText("ADDED");
+                    }
+                });
+
             }
         };
         recyclerView.setAdapter(adapter);
     }
-    public void quantity(View view){
-        quantity=(Button) view;
-        quantity.setText("ADDED");
-    }
+
 }

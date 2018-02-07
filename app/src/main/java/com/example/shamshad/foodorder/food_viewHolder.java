@@ -3,6 +3,7 @@ package com.example.shamshad.foodorder;
 import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,7 +16,7 @@ public class food_viewHolder extends RecyclerView.ViewHolder implements View.OnC
     TextView textView;
     ImageView imageView;
     TextView priceview;
-
+    Button quantity;
     ItemClickListener itemClickListener;
 
     public void setItemClickListener(ItemClickListener itemClickListener) {
@@ -27,6 +28,7 @@ public class food_viewHolder extends RecyclerView.ViewHolder implements View.OnC
         textView=(TextView) itemView.findViewById(R.id.food_textview);
         imageView=(ImageView)itemView.findViewById(R.id.food_imageview);
         priceview=(TextView)itemView.findViewById(R.id.food_price);
+        quantity=(Button)itemView.findViewById(R.id.quantity_button);
         itemView.setOnClickListener(this);
     }
 
