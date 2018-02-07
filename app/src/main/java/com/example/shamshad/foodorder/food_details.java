@@ -1,19 +1,28 @@
 package com.example.shamshad.foodorder;
 
 
+import com.example.shamshad.foodorder.Interface.ItemClickListener;
 
 public class food_details {
     String text;
     String image;
     String price;
+    String food_id;
+
+    ItemClickListener itemClickListener;
 
     public food_details() {
     }
 
-    public food_details(String text, String image, String price) {
+    public food_details(String text, String image, String price, String food_id) {
         this.text = text;
         this.image = image;
         this.price = price;
+        this.food_id = food_id;
+    }
+
+    public void setItemClickListener(ItemClickListener itemClickListener) {
+        this.itemClickListener = itemClickListener;
     }
 
     public String getText() {
@@ -38,5 +47,13 @@ public class food_details {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    public String getFood_id() {
+        return food_id;
+    }
+
+    public void setFood_id(String food_id) {
+        this.food_id = food_id;
     }
 }

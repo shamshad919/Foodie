@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.example.shamshad.foodorder.Interface.ItemClickListener;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -19,47 +20,56 @@ import com.squareup.picasso.Picasso;
 import static android.R.attr.y;
 
 
-public class foodList extends AppCompatActivity{
+public class foodList extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private DatabaseReference mRef;
+    String restaurant_name="";
     Button quantity;
+    FirebaseRecyclerAdapter<food_details,food_viewHolder>adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.foodview);
 
-        Intent intent= getIntent();
-        Bundle b = intent.getExtras();
-        String childname="Dominos";
-
-        if(b!=null)
-        {
-            childname =(String) b.getString("resname");
-        }
-
-
-        recyclerView= (RecyclerView) findViewById(R.id.recycler_foodview);
+        mRef=FirebaseDatabase.getInstance().getReference("restaurants");
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_foodview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        if(getIntent() != null){
+            restaurant_name=getIntent().getStringExtra("restaurant_name");
+        }
+        if(!restaurant_name.isEmpty() && restaurant_name != null){
+            loadlistfood(restaurant_name);
+        }
+        loadlistfood(restaurant_name);
+    }
 
-        mRef= FirebaseDatabase.getInstance().getReference("restaurants").child(childname).child("foodlist");
-       
-        FirebaseRecyclerAdapter<food_details,food_viewHolder> firebaseRecyclerAdapter=new FirebaseRecyclerAdapter<food_details, food_viewHolder>(food_details.class,
+    private void loadlistfood(String restaurant_name) {
+        adapter=new FirebaseRecyclerAdapter<food_details, food_viewHolder>(food_details.class,
                 R.layout.food_listrow,
                 food_viewHolder.class,
-                mRef) {
+                mRef.child(restaurant_name).child("foodlist")) {
             @Override
-            protected void populateViewHolder(final food_viewHolder viewHolder, food_details model, int position) {
-                viewHolder.priceview.setText("Price:$"+model.getPrice());
-                viewHolder.textView.setText(model.getText());
-                Glide.with(foodList.this).load(model.getImage()).into(viewHolder.imageView);
+            protected void populateViewHolder(food_viewHolder viewHolder, food_details model, int position) {
+                viewHolder.textView.setText(model.text);
+                viewHolder.priceview.setText(model.price);
+                Glide.with(foodList.this).load(model.image).into(viewHolder.imageView);
+                final food_details food_details=model;
+                viewHolder.setItemClickListener(new ItemClickListener() {
+                    @Override
+                    public void onCLick(View view, int position, boolean isLongCLick) {
+                        Intent intent=new Intent(foodList.this,cart.class);
+                        startActivity(intent);
+                    }
+                });
             }
         };
-        recyclerView.setAdapter(firebaseRecyclerAdapter);
+        recyclerView.setAdapter(adapter);
     }
     public void quantity(View view){
-        quantity= (Button) findViewById(R.id.quantity_button);
-        quantity.setText("ADDED");}
+        quantity=(Button) view;
+        quantity.setText("ADDED");
+    }
 }
