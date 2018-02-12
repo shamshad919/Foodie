@@ -52,7 +52,7 @@ public class foodList extends AppCompatActivity {
                 food_viewHolder.class,
                 mRef.child(restaurant_name).child("foodlist")) {
             @Override
-            protected void populateViewHolder(food_viewHolder viewHolder, food_details model, int position) {
+            protected void populateViewHolder(food_viewHolder viewHolder, final food_details model, int position) {
                 viewHolder.textView.setText(model.text);
                 viewHolder.priceview.setText(model.price);
                 Glide.with(foodList.this).load(model.image).into(viewHolder.imageView);
@@ -64,11 +64,12 @@ public class foodList extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
-                viewHolder.quantity.setOnClickListener(new View.OnClickListener() {
+                viewHolder.quantity_button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         quantity=(Button)v;
-                        ((Button) v).setText("ADDED");
+                        String s=String.valueOf(model.quantity);
+                        quantity.setText(s);
                     }
                 });
 

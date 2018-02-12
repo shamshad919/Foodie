@@ -7,6 +7,7 @@ public class food_details {
     String text;
     String image;
     String price;
+    String quantity;
     String food_id;
 
     ItemClickListener itemClickListener;
@@ -14,10 +15,11 @@ public class food_details {
     public food_details() {
     }
 
-    public food_details(String text, String image, String price, String food_id) {
+    public food_details(String text, String image, String price, String quantity, String food_id) {
         this.text = text;
         this.image = image;
         this.price = price;
+        this.quantity = quantity;
         this.food_id = food_id;
     }
 
@@ -27,6 +29,14 @@ public class food_details {
 
     public String getText() {
         return text;
+    }
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
     }
 
     public void setText(String text) {
