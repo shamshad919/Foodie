@@ -13,7 +13,6 @@ import com.example.shamshad.foodorder.R;
 
 import static android.R.attr.id;
 
-
 public class restaurantviewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
     TextView textView;
     ImageView imageView;

@@ -1,7 +1,6 @@
 package com.example.shamshad.foodorder;
 
 
-
 public class restaurant_details {
     String name;
     String image;
