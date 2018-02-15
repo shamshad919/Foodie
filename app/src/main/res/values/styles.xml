@@ -7,5 +7,11 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <style name="Collapsedappbar" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">24sp</item>.
+        <item name="android:textColor">@color/White</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
 
 </resources>

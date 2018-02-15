@@ -55,8 +55,9 @@ public class foodList extends AppCompatActivity {
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onCLick(View view, int position, boolean isLongCLick) {
-                        Intent intent=new Intent(foodList.this,fooddetails.class);
-                        startActivity(intent);
+                        Intent fooddetails=new Intent(foodList.this,fooddetails.class);
+                        fooddetails.putExtra("Foodid",adapter.getRef(position).getKey());
+                        startActivity(fooddetails);
                     }
                 });
 

@@ -21,19 +21,20 @@ public class restaurant extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private DatabaseReference mRef;
-    FirebaseRecyclerAdapter<restaurant_details,restaurantviewHolder> firebaseRecyclerAdapter;
+    FirebaseRecyclerAdapter<restaurant_details, restaurantviewHolder> firebaseRecyclerAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.restaurant);
 
 
-        recyclerView= (RecyclerView) findViewById(R.id.recycler_restaurant);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_restaurant);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
-        mRef= FirebaseDatabase.getInstance().getReference("restaurants");
+        mRef = FirebaseDatabase.getInstance().getReference("restaurants");
 
-        firebaseRecyclerAdapter=new FirebaseRecyclerAdapter<restaurant_details, restaurantviewHolder>(restaurant_details.class,
+        firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<restaurant_details, restaurantviewHolder>(restaurant_details.class,
                 R.layout.restaurant_listrow,
                 restaurantviewHolder.class,
                 mRef) {
@@ -42,13 +43,13 @@ public class restaurant extends AppCompatActivity {
                 viewHolder.textView.setText(model.name);
                 Glide.with(restaurant.this).load(model.image).into(viewHolder.imageView);
                 viewHolder.rating.setText(model.rating);
-                final restaurant_details restaurant_details=model;
+                final restaurant_details restaurant_details = model;
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onCLick(View view, int position, boolean isLongCLick) {
-                        Intent intent=new Intent(restaurant.this,foodList.class);
-                        intent.putExtra("restaurant_name",firebaseRecyclerAdapter.getRef(position).getKey());
-                        Log.d("TAG",""+firebaseRecyclerAdapter.getRef(position).getKey());
+                        Intent intent = new Intent(restaurant.this, foodList.class);
+                        intent.putExtra("restaurant_name", firebaseRecyclerAdapter.getRef(position).getKey());
+                        Log.d("TAG", "" + firebaseRecyclerAdapter.getRef(position).getKey());
                         startActivity(intent);
                     }
                 });
