@@ -3,7 +3,7 @@ package com.example.shamshad.foodorder;
 
 import com.example.shamshad.foodorder.Interface.ItemClickListener;
 
-public class food_details {
+public class food_list_details {
     String text;
     String image;
     String price;
@@ -12,10 +12,10 @@ public class food_details {
 
     ItemClickListener itemClickListener;
 
-    public food_details() {
+    public food_list_details() {
     }
 
-    public food_details(String text, String image, String price, String quantity, String food_id) {
+    public food_list_details(String text, String image, String price, String quantity, String food_id) {
         this.text = text;
         this.image = image;
         this.price = price;
