@@ -22,9 +22,9 @@
         </activity>
         <activity android:name=".sign_in" android:noHistory="true" />
         <activity android:name=".sign_up" android:noHistory="true"/>
-        <activity android:name=".restaurant" android:noHistory="true"/>
-        <activity android:name=".foodList" android:noHistory="true"/>
-        <activity android:name=".fooddetails" android:noHistory="true"/>
+        <activity android:name=".restaurant" />
+        <activity android:name=".foodList" />
+        <activity android:name=".fooddetails"/>
     </application>
 
 </manifest>
