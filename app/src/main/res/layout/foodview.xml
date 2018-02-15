@@ -12,5 +12,7 @@
         android:id="@+id/recycler_foodview">
     </android.support.v7.widget.RecyclerView>
 
+    
+
 
 </android.support.constraint.ConstraintLayout>
