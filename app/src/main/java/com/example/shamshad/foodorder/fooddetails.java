@@ -19,7 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import static android.R.attr.mode;
 
-public class fooddetails extends AppCompatActivity implements View.OnClickListener {
+public class fooddetails extends AppCompatActivity  {
 
     TextView foodname, foodprice, fooddescription;
     ImageView foodimage;
@@ -55,8 +55,6 @@ public class fooddetails extends AppCompatActivity implements View.OnClickListen
         if (!foodid.isEmpty()) {
             getFoodDetails(foodid);
         }
-        cart.setOnClickListener(this);
-
 
     }
 
@@ -66,11 +64,21 @@ public class fooddetails extends AppCompatActivity implements View.OnClickListen
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                food_list_details food = dataSnapshot.getValue(food_list_details.class);
-
+                final food_list_details food = dataSnapshot.getValue(food_list_details.class);
+                final String quantity=numberButton.getNumber();
                 foodprice.setText(food.getPrice());
                 foodname.setText(food.getText());
                 Glide.with(getBaseContext()).load(food.getImage()).into(foodimage);
+
+                cart.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent cart=new Intent(fooddetails.this,cart.class);
+                        cart.putExtra("Quantity",quantity);
+                        cart.putExtra("Food id",food.getText());
+                        startActivity(cart);
+                    }
+                });
             }
 
             @Override
@@ -80,11 +88,5 @@ public class fooddetails extends AppCompatActivity implements View.OnClickListen
         });
     }
 
-    @Override
-    public void onClick(View v) {
-        if (v == cart) {
-            Intent cart = new Intent(fooddetails.this, cart.class);
-            startActivity(cart);
-        }
-    }
+
 }
