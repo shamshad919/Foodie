@@ -77,6 +77,7 @@ public class fooddetails extends AppCompatActivity  {
                         cart.putExtra("Quantity",quantity);
                         cart.putExtra("Food id",food.getText());
                         startActivity(cart);
+
                     }
                 });
             }
