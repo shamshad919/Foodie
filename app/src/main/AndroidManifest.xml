@@ -24,7 +24,8 @@
         <activity android:name=".sign_up" android:noHistory="true"/>
         <activity android:name=".restaurant" />
         <activity android:name=".foodList" />
-        <activity android:name=".fooddetails"/>
+        <activity android:name=".fooddetails" />
+        <activity android:name=".cart"/>
     </application>
 
 </manifest>

@@ -20,7 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 
-public class sign_in extends AppCompatActivity  implements View.OnClickListener{
+public class sign_in extends AppCompatActivity implements View.OnClickListener {
 
     private Button signin;
     private EditText editTextEmail;
@@ -38,34 +38,34 @@ public class sign_in extends AppCompatActivity  implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_in);
 
-        progressDialog=new ProgressDialog(this);
+        progressDialog = new ProgressDialog(this);
 
-        mAuth=FirebaseAuth.getInstance();
-        mAuthListener=new FirebaseAuth.AuthStateListener() {
+        mAuth = FirebaseAuth.getInstance();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
 
             }
         };
 
-        signin=(Button)findViewById(R.id.signin1);
-        editTextEmail=(EditText)findViewById(R.id.email_signin);
-        editTextPassword=(EditText)findViewById(R.id.password_signin);
-        signup=(TextView) findViewById(R.id.create_signin);
+        signin = (Button) findViewById(R.id.signin1);
+        editTextEmail = (EditText) findViewById(R.id.email_signin);
+        editTextPassword = (EditText) findViewById(R.id.password_signin);
+        signup = (TextView) findViewById(R.id.create_signin);
 
         signin.setOnClickListener(this);
         signup.setOnClickListener(this);
     }
 
-    public void userLogin(){
-        String email=editTextEmail.getText().toString().trim();
-        String password=editTextPassword.getText().toString().trim();
+    public void userLogin() {
+        String email = editTextEmail.getText().toString().trim();
+        String password = editTextPassword.getText().toString().trim();
 
-        if(TextUtils.isEmpty(email)){
+        if (TextUtils.isEmpty(email)) {
             Toast.makeText(this, "Email field is required", Toast.LENGTH_SHORT).show();
             return;
         }
-        if(TextUtils.isEmpty(password)){
+        if (TextUtils.isEmpty(password)) {
             Toast.makeText(this, "Password field is empty", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -73,16 +73,16 @@ public class sign_in extends AppCompatActivity  implements View.OnClickListener{
         progressDialog.setMessage("Loging in..");
         progressDialog.show();
 
-        mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 progressDialog.dismiss();
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     Toast.makeText(sign_in.this, "Login Successfully", Toast.LENGTH_SHORT).show();
                     finish();
-                    startActivity(new Intent(sign_in.this,restaurant.class));
+                    startActivity(new Intent(sign_in.this, restaurant.class));
                 }
-                if(!task.isSuccessful()){
+                if (!task.isSuccessful()) {
                     Toast.makeText(sign_in.this, "Login Failed", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -100,18 +100,18 @@ public class sign_in extends AppCompatActivity  implements View.OnClickListener{
     @Override
     protected void onStop() {
         super.onStop();
-        if(mAuthListener!=null){
+        if (mAuthListener != null) {
             mAuth.removeAuthStateListener(mAuthListener);
         }
     }
 
     @Override
     public void onClick(View v) {
-        if(v==signin){
+        if (v == signin) {
             userLogin();
         }
-        if(v==signup){
-            startActivity(new Intent(this,sign_up.class));
+        if (v == signup) {
+            startActivity(new Intent(this, sign_up.class));
         }
 
     }

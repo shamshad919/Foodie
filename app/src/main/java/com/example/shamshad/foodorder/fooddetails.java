@@ -1,8 +1,11 @@
 package com.example.shamshad.foodorder;
 
+import android.content.Intent;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,12 +19,13 @@ import com.google.firebase.database.ValueEventListener;
 
 import static android.R.attr.mode;
 
-public class fooddetails extends AppCompatActivity {
+public class fooddetails extends AppCompatActivity implements View.OnClickListener {
 
     TextView foodname, foodprice, fooddescription;
     ImageView foodimage;
     CollapsingToolbarLayout collapsingToolbarLayout;
     ElegantNumberButton numberButton;
+    Button cart;
 
     String foodid = "";
     DatabaseReference food_list;
@@ -39,6 +43,7 @@ public class fooddetails extends AppCompatActivity {
         foodprice = (TextView) findViewById(R.id.food_price);
         fooddescription = (TextView) findViewById(R.id.food_description);
         foodimage = (ImageView) findViewById(R.id.image_food);
+        cart = (Button) findViewById(R.id.cart_button);
 
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing);
         collapsingToolbarLayout.setExpandedTitleColor(R.style.ExpandedAppbar);
@@ -50,6 +55,8 @@ public class fooddetails extends AppCompatActivity {
         if (!foodid.isEmpty()) {
             getFoodDetails(foodid);
         }
+        cart.setOnClickListener(this);
+
 
     }
 
@@ -71,5 +78,13 @@ public class fooddetails extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == cart) {
+            Intent cart = new Intent(fooddetails.this, cart.class);
+            startActivity(cart);
+        }
     }
 }

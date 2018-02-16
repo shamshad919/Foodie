@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if(v==signin){
-            startActivity(new Intent(this,cart.class));
+            startActivity(new Intent(this,sign_in.class));
         }
         if(v==signup){
             startActivity(new Intent(this,sign_up.class));
