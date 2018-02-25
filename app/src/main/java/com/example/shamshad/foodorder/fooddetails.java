@@ -1,6 +1,7 @@
 package com.example.shamshad.foodorder;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,9 +9,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -19,7 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import static android.R.attr.mode;
 
-public class fooddetails extends AppCompatActivity  {
+public class fooddetails extends AppCompatActivity {
 
     TextView foodname, foodprice, fooddescription;
     ImageView foodimage;
@@ -30,6 +34,8 @@ public class fooddetails extends AppCompatActivity  {
     String foodid = "";
     DatabaseReference food_list;
 
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,28 +64,42 @@ public class fooddetails extends AppCompatActivity  {
 
     }
 
-    private void getFoodDetails(String foodid) {
+    private void getFoodDetails(final String foodid) {
 
         food_list.child(foodid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 final food_list_details food = dataSnapshot.getValue(food_list_details.class);
-                final String quantity=numberButton.getNumber();
+                final String quantity = numberButton.getNumber();
+
                 foodprice.setText(food.getPrice());
                 foodname.setText(food.getText());
                 Glide.with(getBaseContext()).load(food.getImage()).into(foodimage);
-
+                mAuth = FirebaseAuth.getInstance();
+                FirebaseUser user =mAuth.getCurrentUser();
+                final String uid=user.getUid();
                 cart.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent cart=new Intent(fooddetails.this,cart.class);
-                        cart.putExtra("Quantity",quantity);
-                        cart.putExtra("Food id",food.getText());
-                        startActivity(cart);
+                        final DatabaseReference cartref=FirebaseDatabase.getInstance().getReference("user").child(uid).child("cart").push();
+                        cartref.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                cartref.child("foodid").setValue(foodid);
+                                Toast.makeText(fooddetails.this, "Added to Cart Successfullly", Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
 
                     }
                 });
+
+
             }
 
             @Override
