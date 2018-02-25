@@ -4,64 +4,78 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="8dp">
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-    <android.support.v7.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="8dp"
-        android:id="@+id/cardview_foodlist">
-    <ImageView
-        android:id="@+id/food_imageview"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/ic_launcher" />
-    </android.support.v7.widget.CardView>
 
-    <TextView
-        android:layout_toEndOf="@+id/cardview_foodlist"
-        android:id="@+id/food_textview"
-        android:paddingLeft="8dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Android"
-        android:textColor="@color/Black"
-        android:textSize="20dp" />
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardview_foodlist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="8dp">
 
-    <ImageView
-        android:paddingLeft="3dp"
-        android:paddingTop="4dp"
-        android:paddingBottom="2dp"
-        android:layout_centerVertical="true"
-        android:layout_width="10dp"
-        android:layout_height="11dp"
-        android:id="@+id/rupee_image"
-        android:src="@drawable/rupee"
-        android:layout_below="@+id/food_textview"
-        android:layout_toEndOf="@+id/cardview_foodlist"
-        android:layout_alignBottom="@+id/food_price" />
-    <TextView
-        android:layout_centerVertical="true"
-        android:id="@+id/food_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="100"
-        android:textColor="@color/Black"
-        android:textSize="16dp"
-        android:layout_toEndOf="@+id/rupee_image"
-        android:layout_below="@+id/food_textview" />
+            <ImageView
+                android:id="@+id/food_imageview"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_launcher" />
+        </android.support.v7.widget.CardView>
 
-    <Button
-        android:layout_alignBaseline="@+id/food_textview"
-        android:id="@+id/quantity_button"
-        android:layout_width="70dp"
-        android:layout_height="40dp"
-        android:layout_alignParentRight="true"
-        android:onClick="quantity"
-        android:text="ADD"
-        android:textSize="12dp" />
+        <TextView
+            android:id="@+id/food_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/cardview_foodlist"
+            android:paddingLeft="8dp"
+            android:text="Android"
+            android:textColor="@color/Black"
+            android:textSize="20dp" />
+
+        <ImageView
+            android:id="@+id/rupee_image"
+            android:layout_width="10dp"
+            android:layout_height="11dp"
+            android:layout_alignBottom="@+id/food_price"
+            android:layout_below="@+id/food_textview"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/cardview_foodlist"
+            android:paddingBottom="2dp"
+            android:paddingLeft="3dp"
+            android:paddingTop="4dp"
+            android:src="@drawable/rupee" />
+
+        <TextView
+            android:id="@+id/food_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/food_textview"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/rupee_image"
+            android:text="100"
+            android:textColor="@color/Black"
+            android:textSize="16dp" />
+
+        <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
+            android:id="@+id/quantity_button_foodlist"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:layout_alignBaseline="@+id/food_textview"
+            android:layout_alignParentRight="true"
+            app:finalNumber="20"
+            app:initialNumber="1"
+            app:textSize="6dp"
+            android:visibility="visible"/>
+        <Button
+            android:id="@+id/add_button"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:text="ADD"
+            android:textColor="@color/White"
+            android:background="@color/colorPrimary"
+            android:layout_alignTop="@+id/quantity_button_foodlist"
+            android:layout_alignParentEnd="true" />
 
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

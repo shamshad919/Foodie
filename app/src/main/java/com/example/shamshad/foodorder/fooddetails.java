@@ -28,7 +28,7 @@ public class fooddetails extends AppCompatActivity {
     TextView foodname, foodprice, fooddescription;
     ImageView foodimage;
     CollapsingToolbarLayout collapsingToolbarLayout;
-    ElegantNumberButton numberButton;
+    private ElegantNumberButton numberButton;
     Button cart;
 
     String foodid = "";
@@ -71,7 +71,7 @@ public class fooddetails extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 final food_list_details food = dataSnapshot.getValue(food_list_details.class);
-                final String quantity = numberButton.getNumber();
+
 
                 foodprice.setText(food.getPrice());
                 foodname.setText(food.getText());
@@ -82,11 +82,13 @@ public class fooddetails extends AppCompatActivity {
                 cart.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        final String quantity = numberButton.getNumber();
                         final DatabaseReference cartref=FirebaseDatabase.getInstance().getReference("user").child(uid).child("cart").push();
                         cartref.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 cartref.child("foodid").setValue(foodid);
+                                cartref.child("quantity").setValue(quantity);
                                 Toast.makeText(fooddetails.this, "Added to Cart Successfullly", Toast.LENGTH_SHORT).show();
                             }
 
