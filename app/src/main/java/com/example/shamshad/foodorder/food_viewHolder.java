@@ -20,6 +20,7 @@ public class food_viewHolder extends RecyclerView.ViewHolder implements View.OnC
     ElegantNumberButton numberButton_foodlist;
     Button add_button;
 
+
     public void setItemClickListener(ItemClickListener itemClickListener) {
         this.itemClickListener = itemClickListener;
     }

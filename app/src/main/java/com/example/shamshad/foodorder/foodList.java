@@ -19,6 +19,7 @@ import com.example.shamshad.foodorder.Interface.ItemClickListener;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,7 +31,9 @@ import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 
 public class foodList extends AppCompatActivity {
     private  TextView cart_count;
+    private  TextView total_price;
     private  Button add_cart;
+    private Button view_cart;
     private BottomNavigationView bottomNavigationView;
     private RecyclerView recyclerView;
     private CollapsingToolbarLayout collapsingToolbarLayout;
@@ -56,13 +59,12 @@ public class foodList extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         cart_count= (TextView) findViewById(R.id.cart_count);
+        total_price= (TextView) findViewById(R.id.total_price);
+        view_cart=(Button) findViewById(R.id.add_cart_button);
 
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_foodlist);
         collapsingToolbarLayout.setExpandedTitleColor(R.style.ExpandedAppbar);
         collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.Collapsedappbar);
-
-
-
 
 
         if (getIntent() != null) {
@@ -111,11 +113,26 @@ public class foodList extends AppCompatActivity {
                         viewHolder.numberButton_foodlist.setVisibility(View.VISIBLE);
                         viewHolder.numberButton_foodlist.setNumber(String.valueOf(1));
                         bottomNavigationView.setVisibility(View.VISIBLE);
-                        String count=viewHolder.numberButton_foodlist.getNumber();
+                        final String count=viewHolder.numberButton_foodlist.getNumber();
                         cart_count.setText(viewHolder.numberButton_foodlist.getNumber()+" Items");
                         DatabaseReference cartref=FirebaseDatabase.getInstance().getReference("user").child(uid).child("cart").child(adapter.getRef(position).getKey());
                         cartref.child("foodid").setValue(adapter.getRef(position).getKey());
                         cartref.child("quantity").setValue(count);
+                        DatabaseReference priceref=FirebaseDatabase.getInstance().getReference("food_list").child(adapter.getRef(position).getKey());
+                        priceref.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                String price= (String) dataSnapshot.child("price").getValue();
+                                int total=Integer.parseInt(price)*Integer.parseInt(count);
+                                total_price.setText("Price: "+total);
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+
                         Toast.makeText(foodList.this, "Added to Cart Successfullly", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -129,15 +146,38 @@ public class foodList extends AppCompatActivity {
                          bottomNavigationView.setVisibility(View.GONE);
                      }
                      else{
-                        String count=viewHolder.numberButton_foodlist.getNumber();
+                         final String count=viewHolder.numberButton_foodlist.getNumber();
                          cart_count.setText(viewHolder.numberButton_foodlist.getNumber()+" Items");
                          DatabaseReference cartref=FirebaseDatabase.getInstance().getReference("user").child(uid).child("cart").child(adapter.getRef(position).getKey());
                          cartref.child("foodid").setValue(adapter.getRef(position).getKey());
                          cartref.child("quantity").setValue(count);
+                         DatabaseReference priceref=FirebaseDatabase.getInstance().getReference("food_list").child(adapter.getRef(position).getKey());
+                         priceref.addValueEventListener(new ValueEventListener() {
+                             @Override
+                             public void onDataChange(DataSnapshot dataSnapshot) {
+                                String price= (String) dataSnapshot.child("price").getValue();
+                                 int total=Integer.parseInt(price)*Integer.parseInt(count);
+                                 total_price.setText("Price: "+total);
+                             }
+
+                             @Override
+                             public void onCancelled(DatabaseError databaseError) {
+
+                             }
+                         });
+
                          Toast.makeText(foodList.this, "Added to Cart Successfullly", Toast.LENGTH_SHORT).show();
                      }
                  }
              });
+                view_cart.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent cart=new Intent(foodList.this,cart.class);
+                        startActivity(cart);
+                    }
+                });
+
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onCLick(View view, int position, boolean isLongCLick) {
