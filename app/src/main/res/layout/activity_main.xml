@@ -13,6 +13,11 @@
         tools:layout_editor_absoluteY="8dp"
         tools:layout_editor_absoluteX="8dp">
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/bg"
+            android:scaleType="centerCrop"/>
         <LinearLayout
             android:id="@+id/linear_main"
             android:layout_marginTop="90dp"
@@ -52,7 +57,7 @@
             android:layout_height="wrap_content"
             android:text="Just a better delivery service"
             android:textSize="25sp"
-            android:textColor="@color/Yellow"
+            android:textColor="@color/White"
             android:layout_below="@+id/limestone"
             android:gravity="center"
             android:layout_centerHorizontal="true" />

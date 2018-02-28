@@ -46,6 +46,8 @@ public class sign_up extends AppCompatActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up);
+        getSupportActionBar().hide();
+
 
         progressDialog = new ProgressDialog(this);
 

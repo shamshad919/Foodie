@@ -20,12 +20,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".sign_in" android:noHistory="true" />
-        <activity android:name=".sign_up" android:noHistory="true"/>
+        <activity
+            android:name=".sign_in"
+            android:noHistory="true" />
+        <activity
+            android:name=".sign_up"
+            android:noHistory="true" />
         <activity android:name=".restaurant" />
         <activity android:name=".foodList" />
         <activity android:name=".fooddetails" />
-        <activity android:name=".cart"/>
+        <activity android:name=".cart" />
     </application>
 
 </manifest>
