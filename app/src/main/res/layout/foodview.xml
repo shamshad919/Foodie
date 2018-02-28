@@ -87,7 +87,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:visibility="visible"
+        android:visibility="gone"
         android:background="#FF1744">
     <RelativeLayout
         android:layout_width="match_parent"
@@ -113,7 +113,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="View Cart"
-            android:background="none"
             android:textColor="@color/White"
             android:layout_marginEnd="40dp"
             android:layout_alignBaseline="@+id/total_price"
@@ -122,7 +121,7 @@
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/arrow"
+            android:src="@drawable/logo"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="8dp" />

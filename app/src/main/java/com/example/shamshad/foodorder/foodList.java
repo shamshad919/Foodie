@@ -26,6 +26,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 
 
@@ -44,6 +47,10 @@ public class foodList extends AppCompatActivity {
     ImageView restaurant_image_foodlist;
     TextView restaurant_name_foodlist;
     FirebaseRecyclerAdapter<food_list_details, food_viewHolder> adapter;
+
+    ArrayList<String> foodidorder=new ArrayList<>();
+    ArrayList<String> priceorder=new ArrayList<>();
+    ArrayList<String> foodnametext=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,17 +121,35 @@ public class foodList extends AppCompatActivity {
                         viewHolder.numberButton_foodlist.setNumber(String.valueOf(1));
                         bottomNavigationView.setVisibility(View.VISIBLE);
                         final String count=viewHolder.numberButton_foodlist.getNumber();
+                        final String foodidkey=adapter.getRef(position).getKey();
                         cart_count.setText(viewHolder.numberButton_foodlist.getNumber()+" Items");
-                        DatabaseReference cartref=FirebaseDatabase.getInstance().getReference("user").child(uid).child("cart").child(adapter.getRef(position).getKey());
+                        DatabaseReference cartref=FirebaseDatabase.getInstance().getReference("user").child(uid).child("cart").child(foodidkey);
                         cartref.child("foodid").setValue(adapter.getRef(position).getKey());
                         cartref.child("quantity").setValue(count);
-                        DatabaseReference priceref=FirebaseDatabase.getInstance().getReference("food_list").child(adapter.getRef(position).getKey());
+                        DatabaseReference priceref=FirebaseDatabase.getInstance().getReference("food_list").child(foodidkey);
                         priceref.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 String price= (String) dataSnapshot.child("price").getValue();
+                                String foodname= (String) dataSnapshot.child("text").getValue();
                                 int total=Integer.parseInt(price)*Integer.parseInt(count);
                                 total_price.setText("Price: "+total);
+
+
+
+                                if(foodidorder.contains(foodidkey)){
+                                    priceorder.set(foodidorder.indexOf(foodidkey), String.valueOf(total));
+
+                                }
+                                else{
+                                    foodidorder.add(foodidkey);
+                                    priceorder.add(String.valueOf(total));
+                                    foodnametext.add(foodname);
+
+                                }
+
+
+
                             }
 
                             @Override
@@ -141,23 +166,50 @@ public class foodList extends AppCompatActivity {
                  public void onValueChange(ElegantNumberButton view, int oldValue, int newValue) {
 
                      if(viewHolder.numberButton_foodlist.getNumber()==String.valueOf(0)){
+                         final String foodidkey=adapter.getRef(position).getKey();
                          viewHolder.add_button.setVisibility(View.VISIBLE);
                          viewHolder.numberButton_foodlist.setVisibility(View.GONE);
                          bottomNavigationView.setVisibility(View.GONE);
+                         DatabaseReference cartref=FirebaseDatabase.getInstance().getReference("user").child(uid).child("cart").child(adapter.getRef(position).getKey());
+                         cartref.removeValue();
+
+                         priceorder.remove(foodidorder.indexOf(foodidkey));
+                         foodnametext.remove(foodidorder.indexOf(foodidkey));
+                         foodidorder.remove(foodidkey);
+
+
+
+
                      }
                      else{
+                         final String foodidkey=adapter.getRef(position).getKey();
                          final String count=viewHolder.numberButton_foodlist.getNumber();
                          cart_count.setText(viewHolder.numberButton_foodlist.getNumber()+" Items");
-                         DatabaseReference cartref=FirebaseDatabase.getInstance().getReference("user").child(uid).child("cart").child(adapter.getRef(position).getKey());
+                         DatabaseReference cartref=FirebaseDatabase.getInstance().getReference("user").child(uid).child("cart").child(foodidkey);
                          cartref.child("foodid").setValue(adapter.getRef(position).getKey());
                          cartref.child("quantity").setValue(count);
-                         DatabaseReference priceref=FirebaseDatabase.getInstance().getReference("food_list").child(adapter.getRef(position).getKey());
+
+                         DatabaseReference priceref=FirebaseDatabase.getInstance().getReference("food_list").child(foodidkey);
                          priceref.addValueEventListener(new ValueEventListener() {
                              @Override
                              public void onDataChange(DataSnapshot dataSnapshot) {
                                 String price= (String) dataSnapshot.child("price").getValue();
+                                 String foodname= (String) dataSnapshot.child("text").getValue();
+
                                  int total=Integer.parseInt(price)*Integer.parseInt(count);
                                  total_price.setText("Price: "+total);
+
+
+                                 if(foodidorder.contains(foodidkey)){
+                                     priceorder.set(foodidorder.indexOf(foodidkey), String.valueOf(total));
+                                 }
+                                 else{
+                                     foodidorder.add(foodidkey);
+                                     priceorder.add(String.valueOf(total));
+                                     foodnametext.add(foodname);
+                                 }
+
+
                              }
 
                              @Override
@@ -174,6 +226,13 @@ public class foodList extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Intent cart=new Intent(foodList.this,cart.class);
+
+                        Bundle args = new Bundle();
+                        args.putSerializable("foodid_order",(Serializable)foodidorder);
+                        args.putSerializable("price_order",(Serializable)priceorder);
+                        args.putSerializable("food_names_order",(Serializable)foodnametext);
+                        cart.putExtra("BUNDLE",args);
+
                         startActivity(cart);
                     }
                 });
