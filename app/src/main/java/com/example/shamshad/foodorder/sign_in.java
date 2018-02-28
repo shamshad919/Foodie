@@ -22,6 +22,7 @@ import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 
 public class sign_in extends AppCompatActivity implements View.OnClickListener {
 
+    private Button signin_google_button;
     private Button signin;
     private EditText editTextEmail;
     private EditText editTextPassword;
@@ -48,7 +49,7 @@ public class sign_in extends AppCompatActivity implements View.OnClickListener {
 
             }
         };
-
+        signin_google_button= (Button) findViewById(R.id.signin_google_button);
         signin = (Button) findViewById(R.id.signin1);
         editTextEmail = (EditText) findViewById(R.id.email_signin);
         editTextPassword = (EditText) findViewById(R.id.password_signin);
@@ -56,6 +57,7 @@ public class sign_in extends AppCompatActivity implements View.OnClickListener {
 
         signin.setOnClickListener(this);
         signup.setOnClickListener(this);
+        signin_google_button.setOnClickListener(this);
     }
 
     public void userLogin() {
@@ -113,6 +115,9 @@ public class sign_in extends AppCompatActivity implements View.OnClickListener {
         }
         if (v == signup) {
             startActivity(new Intent(this, sign_up.class));
+        }
+        if(v==signin_google_button){
+
         }
 
     }
