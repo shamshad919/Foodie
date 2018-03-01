@@ -1,88 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient"
     tools:context="com.example.shamshad.foodorder.sign_in">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/bg"
-        android:scaleType="centerCrop"/>
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
-    <EditText
-        android:id="@+id/email_signin"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:paddingLeft="10dp"
-        android:layout_marginTop="142dp"
-        android:background="@drawable/rounded_edittext_button"
-        android:drawableLeft="@drawable/ic_account_circle_black_24dp"
-        android:drawablePadding="12dp"
-        android:ems="14"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
-        android:textColor="@color/Black"
-        android:textColorHint="@color/Black"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/password_signin" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg" />
 
-    <EditText
-        android:id="@+id/password_signin"
-        android:paddingLeft="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_below="@+id/email_signin"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
-        android:drawableLeft="@drawable/ic_lock_black_24dp"
-        android:ems="14"
-        android:drawablePadding="12dp"
-        android:hint="Password"
-        android:background="@drawable/rounded_edittext_button"
-        android:textColor="@color/Black"
-        android:inputType="textPassword"
-        android:textColorHint="@color/Black" />
+        <EditText
+            android:id="@+id/email_signin"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignStart="@+id/password_signin"
+            android:layout_marginTop="142dp"
+            android:background="@drawable/rounded_edittext_button"
+            android:drawableLeft="@drawable/ic_account_circle_black_24dp"
+            android:drawablePadding="12dp"
+            android:ems="14"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="10dp"
+            android:textColor="@color/Black"
+            android:textColorHint="@color/Black" />
 
-    <Button
-        android:id="@+id/signin1"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/password_signin"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="39dp"
-        android:background="@drawable/rounded_button"
-        android:text="Sign in"
-        android:textAllCaps="false"
-        android:textColor="@color/White" />
+        <EditText
+            android:id="@+id/password_signin"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_below="@+id/email_signin"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/rounded_edittext_button"
+            android:drawableLeft="@drawable/ic_lock_black_24dp"
+            android:drawablePadding="12dp"
+            android:ems="14"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:paddingLeft="10dp"
+            android:textColor="@color/Black"
+            android:textColorHint="@color/Black" />
 
-    <Button
-        android:id="@+id/signin_google_button"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="23dp"
-        android:background="@drawable/rounded_button_google"
-        android:text="Signin with Google"
-        android:textAllCaps="false"
-        android:drawableLeft="@drawable/ic_google"
-        android:textColor="@color/White"
-        android:paddingLeft="10dp"
-        android:layout_below="@+id/signin1"
-        android:layout_alignEnd="@+id/password_signin" />
+        <Button
+            android:id="@+id/signin1"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/password_signin"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="39dp"
+            android:background="@drawable/rounded_button"
+            android:text="Sign in"
+            android:textAllCaps="false"
+            android:textColor="@color/White" />
 
-    <TextView
-        android:id="@+id/create_signin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/White"
-        android:text="Not a member?Sign up now."
-        android:layout_marginTop="57dp"
-        android:layout_below="@+id/signin_google_button"
-        android:layout_centerHorizontal="true" />
+        <Button
+            android:id="@+id/signin_google_button"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_alignEnd="@+id/password_signin"
+            android:layout_below="@+id/signin1"
+            android:layout_marginTop="23dp"
+            android:background="@drawable/rounded_button_google"
+            android:drawableLeft="@drawable/ic_google"
+            android:paddingLeft="10dp"
+            android:text="Signin with Google"
+            android:textAllCaps="false"
+            android:textColor="@color/White" />
 
+        <TextView
+            android:id="@+id/create_signin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/signin_google_button"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="57dp"
+            android:text="Not a member?Sign up now."
+            android:textColor="@color/White" />
 
+    </RelativeLayout>
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>
