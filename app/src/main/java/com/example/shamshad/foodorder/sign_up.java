@@ -16,6 +16,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -28,12 +30,16 @@ import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 
 public class sign_up extends AppCompatActivity implements View.OnClickListener {
 
+    private Button signin_google_button;
     private Button signup;
     private EditText editTextName;
     private EditText editTextEmail;
     private EditText editTextPassword;
     private EditText editTextRe_password;
     private TextView textViewSignin;
+    private final static int RC_SIGN_IN =2;
+    private GoogleApiClient mGoogleApiClient;
+
 
     private ProgressDialog progressDialog;
 
@@ -59,7 +65,7 @@ public class sign_up extends AppCompatActivity implements View.OnClickListener {
             }
         };
 
-
+        signin_google_button= (Button) findViewById(R.id.signup_google_button);
         signup = (Button) findViewById(R.id.signup);
         editTextName = (EditText) findViewById(R.id.name_signup);
         editTextEmail = (EditText) findViewById(R.id.email_signup);
@@ -69,6 +75,7 @@ public class sign_up extends AppCompatActivity implements View.OnClickListener {
 
         signup.setOnClickListener(this);
         textViewSignin.setOnClickListener(this);
+        signin_google_button.setOnClickListener(this);
 
     }
 
@@ -143,5 +150,12 @@ public class sign_up extends AppCompatActivity implements View.OnClickListener {
             Intent intent = new Intent(getApplicationContext(), sign_in.class);
             startActivity(intent);
         }
+        if(v==signin_google_button){
+            googleSignin();
+        }
+    }
+    private void googleSignin() {
+        Intent signInIntent= Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 }

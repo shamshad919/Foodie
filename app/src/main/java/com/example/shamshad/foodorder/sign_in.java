@@ -4,32 +4,47 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInApi;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 
+import static android.R.attr.handle;
+import static android.R.attr.start;
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
+import static com.example.shamshad.foodorder.R.mipmap.g;
 
-public class sign_in extends AppCompatActivity implements View.OnClickListener {
+public class sign_in extends AppCompatActivity implements View.OnClickListener,GoogleApiClient.OnConnectionFailedListener {
 
     private Button signin_google_button;
     private Button signin;
     private EditText editTextEmail;
     private EditText editTextPassword;
     private TextView signup;
+    private final static int RC_SIGN_IN =2;
 
     private ProgressDialog progressDialog;
-
+    private GoogleApiClient mGoogleApiClient;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
@@ -46,9 +61,24 @@ public class sign_in extends AppCompatActivity implements View.OnClickListener {
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-
+                if(FirebaseAuth.getInstance().getCurrentUser()!=null){
+                    startActivity(new Intent(sign_in.this,restaurant.class));
+                }
             }
         };
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+
+         mGoogleApiClient=new GoogleApiClient.Builder(this)
+                 .enableAutoManage(this,this)
+                 .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
+                 .build();
+
+
+
         signin_google_button= (Button) findViewById(R.id.signin_google_button);
         signin = (Button) findViewById(R.id.signin1);
         editTextEmail = (EditText) findViewById(R.id.email_signin);
@@ -59,6 +89,7 @@ public class sign_in extends AppCompatActivity implements View.OnClickListener {
         signup.setOnClickListener(this);
         signin_google_button.setOnClickListener(this);
     }
+
 
     public void userLogin() {
         String email = editTextEmail.getText().toString().trim();
@@ -117,8 +148,64 @@ public class sign_in extends AppCompatActivity implements View.OnClickListener {
             startActivity(new Intent(this, sign_up.class));
         }
         if(v==signin_google_button){
-
+            googleSignin();
         }
 
     }
+
+
+    private void googleSignin() {
+        Intent signInIntent=Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+           GoogleSignInResult result=Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            if(result.isSuccess()){
+                GoogleSignInAccount account=result.getSignInAccount();
+                Toast.makeText(sign_in.this,"Login successfully",Toast.LENGTH_LONG).show();
+                firebaseAuthWithGoogle(account);
+            }
+            else{
+                Toast.makeText(sign_in.this,"Task unsuccess",Toast.LENGTH_LONG).show();
+            }
+
+        }
+    }
+
+    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d("TAG", "signInWithCredential:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            //updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w("TAG" , "signInWithCredential:failure", task.getException());
+                            Toast.makeText(sign_in.this,"Failed",Toast.LENGTH_LONG).show();
+                            //updateUI(null);
+                        }
+
+                        // ...
+                    }
+                });
+    }
+
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        Toast.makeText(sign_in.this,"connection failed",Toast.LENGTH_LONG).show();
+    }
+
+
+
 }

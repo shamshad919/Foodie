@@ -15,11 +15,55 @@
       },
       "oauth_client": [
         {
-          "client_id": "755636454656-g9k1maiv77u883v5lv9mbvpoealtbns7.apps.googleusercontent.com",
+          "client_id": "755636454656-m3rvln8uf7po07d8j17p45sfsafnnfee.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.shamshad.foodorder",
-            "certificate_hash": "06df1b8fd35221688026ce19493160f66cbfc1f8"
+            "certificate_hash": "8994517e1c4d257d9d35b8911b40407b8a28d466"
+          }
+        },
+        {
+          "client_id": "755636454656-t87q1nim3o6qpcsjn7erkmcrr7lusnsa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsRU6S6J9sYO05M_l_Mvj4e7NUiMwTy24"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "755636454656-t87q1nim3o6qpcsjn7erkmcrr7lusnsa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:755636454656:android:863cf7f2ac4e25b2",
+        "android_client_info": {
+          "package_name": "com.example.android.recycler_firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "755636454656-5aj62pi8ho9ub36mpp8kg7ndrr2h3vgg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.android.recycler_firebase",
+            "certificate_hash": "8994517e1c4d257d9d35b8911b40407b8a28d466"
           }
         },
         {
