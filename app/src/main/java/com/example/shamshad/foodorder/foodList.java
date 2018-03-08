@@ -51,6 +51,7 @@ public class foodList extends AppCompatActivity {
     ArrayList<String> foodidorder=new ArrayList<>();
     ArrayList<String> priceorder=new ArrayList<>();
     ArrayList<String> foodnametext=new ArrayList<>();
+    ArrayList<String> qty_orders=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,12 +140,14 @@ public class foodList extends AppCompatActivity {
 
                                 if(foodidorder.contains(foodidkey)){
                                     priceorder.set(foodidorder.indexOf(foodidkey), String.valueOf(total));
+                                    qty_orders.set(foodidorder.indexOf(foodidkey),String.valueOf(count));
 
                                 }
                                 else{
                                     foodidorder.add(foodidkey);
                                     priceorder.add(String.valueOf(total));
                                     foodnametext.add(foodname);
+                                    qty_orders.add(count);
 
                                 }
 
@@ -175,7 +178,9 @@ public class foodList extends AppCompatActivity {
 
                          priceorder.remove(foodidorder.indexOf(foodidkey));
                          foodnametext.remove(foodidorder.indexOf(foodidkey));
+                         qty_orders.remove(foodidorder.indexOf(foodidkey));
                          foodidorder.remove(foodidkey);
+
 
 
 
@@ -202,11 +207,13 @@ public class foodList extends AppCompatActivity {
 
                                  if(foodidorder.contains(foodidkey)){
                                      priceorder.set(foodidorder.indexOf(foodidkey), String.valueOf(total));
+                                     qty_orders.set(foodidorder.indexOf(foodidkey),String.valueOf(count));
                                  }
                                  else{
                                      foodidorder.add(foodidkey);
                                      priceorder.add(String.valueOf(total));
                                      foodnametext.add(foodname);
+                                     qty_orders.add(String.valueOf(count));
                                  }
 
 
@@ -231,6 +238,7 @@ public class foodList extends AppCompatActivity {
                         args.putSerializable("foodid_order",(Serializable)foodidorder);
                         args.putSerializable("price_order",(Serializable)priceorder);
                         args.putSerializable("food_names_order",(Serializable)foodnametext);
+                        args.putSerializable("qty_order",(Serializable)qty_orders);
                         cart.putExtra("BUNDLE",args);
 
                         startActivity(cart);

@@ -18,11 +18,13 @@ public class cartlistadapter extends ArrayAdapter<String> {
     Context context;
     String[] foodsincart;
     String[] priceincart;
-    cartlistadapter(Context context,String[] foodsincart,String[] priceincart ){
+    String[] qtys;
+    cartlistadapter(Context context,String[] foodsincart,String[] priceincart,String[] qtys ){
         super(context,R.layout.cartlistrow,foodsincart);
         this.context=context;
         this.foodsincart=foodsincart;
         this.priceincart=priceincart;
+        this.qtys=qtys;
     }
 
     @NonNull
@@ -32,8 +34,11 @@ public class cartlistadapter extends ArrayAdapter<String> {
         View customView=myinflater.inflate(R.layout.cartlistrow,parent,false);
         TextView food_in_cartlist=(TextView)customView.findViewById(R.id.food_in_cartlist);
         TextView price_in_cartlist=(TextView)customView.findViewById(R.id.price_in_cartlist);
+        TextView qty_in_cartlist=(TextView)customView.findViewById(R.id.qty_textview);
         food_in_cartlist.setText(foodsincart[position]);
         price_in_cartlist.setText(priceincart[position]);
+        qty_in_cartlist.setText(qtys[position]);
+
         return customView;
     }
 }

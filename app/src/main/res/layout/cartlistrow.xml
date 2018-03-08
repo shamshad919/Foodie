@@ -12,6 +12,15 @@
         android:text="FoodItem" />
 
     <TextView
+        android:id="@+id/qty_textview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="20dp"
+        android:text="qty"
+        />
+
+    <TextView
         android:id="@+id/price_in_cartlist"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
