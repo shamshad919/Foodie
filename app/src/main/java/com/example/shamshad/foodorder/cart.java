@@ -35,6 +35,7 @@ public class cart extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cart);
+        getSupportActionBar().hide();
 
         TextView totprice_value = (TextView) findViewById(R.id.total_price_cart_value);
         place_order = (Button) findViewById(R.id.place_order_btn);
@@ -47,14 +48,14 @@ public class cart extends AppCompatActivity {
         ArrayList<String> qty_order = new ArrayList<>();
 
 
-        if (getIntent() != null) {
-            Intent intent = getIntent();
-            Bundle args = intent.getBundleExtra("BUNDLE");
-            foodid_order = (ArrayList<String>) args.getSerializable("foodid_order");
-            price_order = (ArrayList<String>) args.getSerializable("price_order");
-            food_names_order = (ArrayList<String>) args.getSerializable("food_names_order");
-            qty_order = (ArrayList<String>) args.getSerializable("qty_order");
-        }
+
+        Intent intent = getIntent();
+        Bundle args = intent.getBundleExtra("BUNDLE");
+        foodid_order = (ArrayList<String>) args.getSerializable("foodid_order");
+        price_order = (ArrayList<String>) args.getSerializable("price_order");
+        food_names_order = (ArrayList<String>) args.getSerializable("food_names_order");
+        qty_order = (ArrayList<String>) args.getSerializable("qty_order");
+
 
         final int itemcount = foodid_order.size();
         String[] foodsincart = new String[itemcount];

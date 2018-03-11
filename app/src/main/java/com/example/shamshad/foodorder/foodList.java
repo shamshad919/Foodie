@@ -57,6 +57,7 @@ public class foodList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.foodview);
+        getSupportActionBar().hide();
 
         add_cart= (Button) findViewById(R.id.add_cart_button);
         bottomNavigationView= (BottomNavigationView) findViewById(R.id.bottom_navigation_cart);

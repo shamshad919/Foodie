@@ -41,6 +41,7 @@ public class fooddetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fooddetails);
+        getSupportActionBar().hide();
 
         food_list = FirebaseDatabase.getInstance().getReference("food_list");
 

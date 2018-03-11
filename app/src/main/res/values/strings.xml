@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Food order</string>
     <string name="rupee">\u20B9</string>
+    <string name="nav_explore">Explore</string>
+    <string name="nav_cart">Cart</string>
+    <string name="nav_account">Account</string>
 </resources>

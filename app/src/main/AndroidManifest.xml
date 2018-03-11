@@ -30,6 +30,7 @@
         <activity android:name=".foodList" />
         <activity android:name=".fooddetails" />
         <activity android:name=".cart" />
+        <activity android:name=".account_details"></activity>
     </application>
 
 </manifest>
