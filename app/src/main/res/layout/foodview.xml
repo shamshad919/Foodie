@@ -88,8 +88,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:visibility="gone"
-        android:background="#FF1744">
+        android:background="#FF9800">
     <RelativeLayout
+        android:padding="5sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
@@ -109,22 +110,18 @@
             android:layout_toEndOf="@+id/cart_count"
             android:id="@+id/total_price"/>
         <Button
+            android:paddingLeft="10dp"
             android:id="@+id/add_cart_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="View Cart"
-            android:textColor="@color/White"
-            android:layout_marginEnd="40dp"
+            android:textColor="@color/Black"
+            android:background="@drawable/rounded_edittext_button"
+            android:layout_alignParentRight="true"
             android:layout_alignBaseline="@+id/total_price"
             android:layout_alignBottom="@+id/total_price"
-            android:layout_alignParentEnd="true" />
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/logo"
-            android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="8dp" />
+            android:drawableRight="@drawable/ic_action_name"/>
 
      </RelativeLayout>
     </android.support.design.widget.BottomNavigationView>

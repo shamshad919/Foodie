@@ -5,12 +5,142 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.shamshad.foodorder.account_details">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:background="@drawable/bg_header"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="200dp">
+
+            <ImageView
+                android:layout_marginTop="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/account_details_name"
+                android:layout_gravity="center"
+                android:textSize="20sp"
+                android:textColor="@color/White"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name"/>
+            <TextView
+                android:id="@+id/account_details_email"
+                android:layout_gravity="center"
+                android:textSize="15sp"
+                android:textColor="@color/White"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email"/>
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello world" />
+        </LinearLayout>
+        <android.support.v7.widget.CardView
+            android:id="@+id/account_details_cardview_cart"
+            app:cardCornerRadius="20dp"
+            app:cardBackgroundColor="#1565C0"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="180dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <Button
+                android:layout_centerInParent="true"
+                android:id="@+id/account_details_cart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:text="Cart"
+                android:textAllCaps="false"
+                android:textColor="@color/White"
+                android:textSize="18sp" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            app:cardCornerRadius="20dp"
+            app:cardBackgroundColor="#1565C0"
+            android:id="@+id/account_details_cardview_order"
+            android:layout_below="@id/account_details_cardview_cart"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="15dp"
+            android:layout_centerHorizontal="true">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <Button
+                    android:layout_centerInParent="true"
+                    android:id="@+id/account_details_order"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:text="Orders"
+                    android:textAllCaps="false"
+                    android:textColor="@color/White"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            app:cardCornerRadius="20dp"
+            app:cardBackgroundColor="#1565C0"
+            android:id="@+id/account_details_cardview_address"
+            android:layout_below="@id/account_details_cardview_order"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="15dp"
+            android:layout_centerHorizontal="true">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <Button
+                    android:layout_centerInParent="true"
+                    android:id="@+id/account_details_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:text="Address"
+                    android:textAllCaps="false"
+                    android:textColor="@color/White"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            app:cardCornerRadius="20dp"
+            app:cardBackgroundColor="#1565C0"
+            android:layout_below="@id/account_details_cardview_address"
+            android:id="@+id/account_details_cardview_signout"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="15dp"
+            android:layout_centerHorizontal="true">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <Button
+                    android:layout_centerInParent="true"
+                    android:id="@+id/account_details_signout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:text="Sign out"
+                    android:textAllCaps="false"
+                    android:textColor="@color/White"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+    </RelativeLayout>
+    </ScrollView>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation_view"
