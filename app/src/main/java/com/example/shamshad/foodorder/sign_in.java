@@ -68,6 +68,7 @@ public class sign_in extends AppCompatActivity implements View.OnClickListener,G
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if(FirebaseAuth.getInstance().getCurrentUser()!=null){
+
                     startActivity(new Intent(sign_in.this,restaurant.class));
                 }
             }
@@ -174,10 +175,11 @@ public class sign_in extends AppCompatActivity implements View.OnClickListener,G
             if(result.isSuccess()){
                 GoogleSignInAccount account=result.getSignInAccount();
                 Toast.makeText(sign_in.this,"Login successfully",Toast.LENGTH_LONG).show();
+                progressDialog.setMessage("Loging in..");
+                progressDialog.show();
                 firebaseAuthWithGoogle(account);
             }
             else{
-                Toast.makeText(sign_in.this,"Task unsuccess",Toast.LENGTH_LONG).show();
             }
 
         }

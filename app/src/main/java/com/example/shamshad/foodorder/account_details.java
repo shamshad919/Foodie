@@ -1,8 +1,10 @@
 package com.example.shamshad.foodorder;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,14 +15,22 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class account_details extends AppCompatActivity implements View.OnClickListener{
 
+    private Button address;
     private Button signout;
     private Button cart;
     private TextView name;
     private TextView email;
 
+    private Context context=account_details.this;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
@@ -30,6 +40,7 @@ public class account_details extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.activity_account_details);
         getSupportActionBar().hide();
 
+        address= (Button) findViewById(R.id.account_details_address);
         signout= (Button) findViewById(R.id.account_details_signout);
         cart= (Button) findViewById(R.id.account_details_cart);
         name= (TextView) findViewById(R.id.account_details_name);
@@ -37,6 +48,7 @@ public class account_details extends AppCompatActivity implements View.OnClickLi
 
         signout.setOnClickListener(this);
         cart.setOnClickListener(this);
+        address.setOnClickListener(this);
 
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -56,25 +68,8 @@ public class account_details extends AppCompatActivity implements View.OnClickLi
         Menu menu=bottomNavigationView.getMenu();
         MenuItem menuItem=menu.getItem(2);
         menuItem.setChecked(true);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.nav_explore :
-                        startActivity(new Intent(account_details.this,restaurant.class));
-                        return true;
-                    case R.id.nav_cart:
-                        startActivity(new Intent(account_details.this,cart.class));
-                        return true;
-                    case R.id.nav_acccount:
+        navigationview_helper.enableNavigationView(context,bottomNavigationView);
 
-                        return true;
-                    default:
-                        return  true;
-                }
-
-            }
-        });
     }
     @Override
     protected void onStart() {
@@ -97,6 +92,9 @@ public class account_details extends AppCompatActivity implements View.OnClickLi
         }
         if(v==cart){
             startActivity(new Intent(account_details.this,cart.class));
+        }
+        if(v==address){
+            startActivity(new Intent(account_details.this,address.class));
         }
     }
 

@@ -67,22 +67,6 @@ public class cart extends AppCompatActivity {
 
         place_order.setOnClickListener(new BlakesClickListener(priceincart,this));
 
-        /*DatabaseReference foodlistdatabase=FirebaseDatabase.getInstance().getReference("foodlist");
-        int i;
-        for(i=0;i<itemcount;i++){
-            final int finalI = i;
-            foodlistdatabase.child(foodid_order.get(i)).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    foodsincart[finalI]= (String) dataSnapshot.child("text").getValue();
-
-                }
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                }
-            });
-        }*/
-
         int i, totprice = 0;
         for (i = 0; i < itemcount; i++) {
             totprice = totprice + (Integer.parseInt(priceincart[i]));

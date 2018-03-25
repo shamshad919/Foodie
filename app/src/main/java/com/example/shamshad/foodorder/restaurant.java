@@ -1,5 +1,6 @@
 package com.example.shamshad.foodorder;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -24,6 +25,8 @@ import com.squareup.picasso.Picasso;
 
 public class restaurant extends AppCompatActivity {
 
+    private Context context=restaurant.this;
+
     private RecyclerView recyclerView;
     private DatabaseReference mRef;
     BottomNavigationView bottomNavigationView;
@@ -47,24 +50,7 @@ public class restaurant extends AppCompatActivity {
         Menu menu=bottomNavigationView.getMenu();
         MenuItem menuItem=menu.getItem(0);
         menuItem.setChecked(true);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.nav_explore :
-                        return true;
-                    case R.id.nav_cart:
-                        startActivity(new Intent(restaurant.this,cart.class));
-                        return true;
-                    case R.id.nav_acccount:
-                        startActivity(new Intent(restaurant.this,account_details.class));
-                        return true;
-                    default:
-                        return  true;
-                }
-
-            }
-        });
+        navigationview_helper.enableNavigationView(context,bottomNavigationView);
 
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<restaurant_details, restaurantviewHolder>(restaurant_details.class,
                 R.layout.restaurant_listrow,

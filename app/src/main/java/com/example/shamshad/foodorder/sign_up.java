@@ -29,6 +29,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -72,6 +73,7 @@ public class sign_up extends AppCompatActivity implements View.OnClickListener,G
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
                 if(user!=null){
+                    progressDialog.dismiss();
                     startActivity(new Intent(sign_up.this,restaurant.class));
                 }
             }
@@ -149,6 +151,8 @@ public class sign_up extends AppCompatActivity implements View.OnClickListener,G
                             Toast.makeText(sign_up.this, "Registration Completed",
                                     Toast.LENGTH_SHORT).show();
                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(name).build();
+                            user.updateProfile(profileUpdates);
                             if (user != null) {
                                 String uid = user.getUid();
                                 // Write a message to the database
