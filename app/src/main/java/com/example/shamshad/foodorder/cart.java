@@ -6,6 +6,8 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -14,6 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -38,11 +41,39 @@ public class cart extends AppCompatActivity {
         getSupportActionBar().hide();
 
         TextView totprice_value = (TextView) findViewById(R.id.total_price_cart_value);
+        RecyclerView cartlistView= (RecyclerView) findViewById(R.id.cartlistview);
+        cartlistView.setLayoutManager(new LinearLayoutManager(this));
+        cartlistView.setHasFixedSize(true);
         place_order = (Button) findViewById(R.id.place_order_btn);
-        final ListView cartlistview = (ListView) findViewById(R.id.cartlistview);
+
+        FirebaseAuth mAuth =FirebaseAuth.getInstance();
+        FirebaseUser user=mAuth.getCurrentUser();
+        String uid=user.getUid();
+        DatabaseReference cartlistref=FirebaseDatabase.getInstance().getReference("user").child(uid).child("cart");
+
+        final int[] totalprice = {0};
 
 
-        ArrayList<String> foodid_order = new ArrayList<>();
+        FirebaseRecyclerAdapter<food_list_details,cartViewHolder> cartfirebaseadapter;
+        cartfirebaseadapter=new FirebaseRecyclerAdapter<food_list_details, cartViewHolder>(food_list_details.class,
+                R.layout.cartlistrow,
+                cartViewHolder.class,
+                cartlistref) {
+            @Override
+            protected void populateViewHolder(cartViewHolder viewHolder, food_list_details model, int position) {
+                viewHolder.foodnametextView.setText(model.food_id);
+                viewHolder.quantitytextView.setText(model.quantity);
+                int addedprice=Integer.parseInt(model.price)*Integer.parseInt(model.quantity);
+                viewHolder.pricetextView.setText(String .valueOf(addedprice));
+                totalprice[0] = totalprice[0] +addedprice;
+
+            }
+        };
+        cartlistView.setAdapter(cartfirebaseadapter);
+
+        totprice_value.setText(String.valueOf(totalprice[0]));
+
+        /*ArrayList<String> foodid_order = new ArrayList<>();
         ArrayList<String> price_order = new ArrayList<>();
         ArrayList<String> food_names_order = new ArrayList<>();
         ArrayList<String> qty_order = new ArrayList<>();
@@ -83,15 +114,50 @@ public class cart extends AppCompatActivity {
             });
         }*/
 
-        int i, totprice = 0;
+        /*int i, totprice = 0;
         for (i = 0; i < itemcount; i++) {
             totprice = totprice + (Integer.parseInt(priceincart[i]));
         }
-        totprice_value.setText(String.valueOf(totprice));
+        totprice_value.setText(String.valueOf(totprice));*/
 
 
-        ListAdapter mycartlistadapter = new cartlistadapter(this, foodsincart, priceincart, qtys);
-        cartlistview.setAdapter(mycartlistadapter);
+
+
+
+        /*final Context context=this;
+
+        cartlistref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                int itemcount = (int) dataSnapshot.getChildrenCount();
+
+                String[] foodsincart=new String[itemcount];
+                String[] priceincart=new String[itemcount];
+                String[] qtys=new String[itemcount];
+
+                int i=0;
+                for (DataSnapshot snap: dataSnapshot.getChildren()) {
+                    foodsincart[i]= String.valueOf(snap.child("foodid").getValue());
+                    priceincart[i]= String.valueOf(snap.child("price").getValue());
+                    qtys[i]= String.valueOf(snap.child("quantity").getValue())
+                    i++;
+                }
+
+                ListAdapter mycartlistadapter = new cartlistadapter(context, foodsincart, priceincart, qtys);
+                cartlistview.setAdapter(mycartlistadapter);
+
+                place_order.setOnClickListener(new BlakesClickListener(priceincart,context));
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });*/
+
+
 
 
     }

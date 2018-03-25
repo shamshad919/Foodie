@@ -125,9 +125,10 @@ public class foodList extends AppCompatActivity {
                         final String count=viewHolder.numberButton_foodlist.getNumber();
                         final String foodidkey=adapter.getRef(position).getKey();
                         cart_count.setText(viewHolder.numberButton_foodlist.getNumber()+" Items");
-                        DatabaseReference cartref=FirebaseDatabase.getInstance().getReference("user").child(uid).child("cart").child(foodidkey);
-                        cartref.child("foodid").setValue(adapter.getRef(position).getKey());
+                        final DatabaseReference cartref=FirebaseDatabase.getInstance().getReference("user").child(uid).child("cart").child(foodidkey);
+                        cartref.child("food_id").setValue(adapter.getRef(position).getKey());
                         cartref.child("quantity").setValue(count);
+
                         DatabaseReference priceref=FirebaseDatabase.getInstance().getReference("food_list").child(foodidkey);
                         priceref.addValueEventListener(new ValueEventListener() {
                             @Override
@@ -136,6 +137,7 @@ public class foodList extends AppCompatActivity {
                                 String foodname= (String) dataSnapshot.child("text").getValue();
                                 int total=Integer.parseInt(price)*Integer.parseInt(count);
                                 total_price.setText("Price: "+total);
+                                cartref.child("price").setValue(price);
 
 
 
@@ -192,7 +194,7 @@ public class foodList extends AppCompatActivity {
                          final String count=viewHolder.numberButton_foodlist.getNumber();
                          cart_count.setText(viewHolder.numberButton_foodlist.getNumber()+" Items");
                          DatabaseReference cartref=FirebaseDatabase.getInstance().getReference("user").child(uid).child("cart").child(foodidkey);
-                         cartref.child("foodid").setValue(adapter.getRef(position).getKey());
+                         cartref.child("food_id").setValue(adapter.getRef(position).getKey());
                          cartref.child("quantity").setValue(count);
 
                          DatabaseReference priceref=FirebaseDatabase.getInstance().getReference("food_list").child(foodidkey);
