@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
 
-        signin=(Button)findViewById(R.id.signin_main);
+        signin= (Button) findViewById(R.id.signin_main);
         signup=(TextView)findViewById(R.id.signup_main);
 
         signin.setOnClickListener(this);
