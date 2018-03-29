@@ -32,7 +32,12 @@ import java.util.ArrayList;
 
 public class cart extends AppCompatActivity {
 
+    int totalPrice=0;
+
+    private TextView totprice_value;
     private Button place_order;
+    private RecyclerView cartlistView;
+    FirebaseRecyclerAdapter<food_list_details,cartViewHolder> cartfirebaseadapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +45,8 @@ public class cart extends AppCompatActivity {
         setContentView(R.layout.cart);
         getSupportActionBar().hide();
 
-        TextView totprice_value = (TextView) findViewById(R.id.total_price_cart_value);
-        RecyclerView cartlistView= (RecyclerView) findViewById(R.id.cartlistview);
+        totprice_value = (TextView) findViewById(R.id.total_price_cart_value);
+        cartlistView= (RecyclerView) findViewById(R.id.cartlistview);
         cartlistView.setLayoutManager(new LinearLayoutManager(this));
         cartlistView.setHasFixedSize(true);
         place_order = (Button) findViewById(R.id.place_order_btn);
@@ -50,28 +55,47 @@ public class cart extends AppCompatActivity {
         FirebaseUser user=mAuth.getCurrentUser();
         String uid=user.getUid();
         DatabaseReference cartlistref=FirebaseDatabase.getInstance().getReference("user").child(uid).child("cart");
+        DatabaseReference foodref=FirebaseDatabase.getInstance().getReference("food_list");
 
-        final int[] totalprice = {0};
 
-
-        FirebaseRecyclerAdapter<food_list_details,cartViewHolder> cartfirebaseadapter;
         cartfirebaseadapter=new FirebaseRecyclerAdapter<food_list_details, cartViewHolder>(food_list_details.class,
                 R.layout.cartlistrow,
                 cartViewHolder.class,
                 cartlistref) {
             @Override
             protected void populateViewHolder(cartViewHolder viewHolder, food_list_details model, int position) {
-                viewHolder.foodnametextView.setText(model.food_id);
+                viewHolder.foodnametextView.setText(model.text);
                 viewHolder.quantitytextView.setText(model.quantity);
                 int addedprice=Integer.parseInt(model.price)*Integer.parseInt(model.quantity);
                 viewHolder.pricetextView.setText(String .valueOf(addedprice));
-                totalprice[0] = totalprice[0] +addedprice;
-
             }
         };
         cartlistView.setAdapter(cartfirebaseadapter);
 
-        totprice_value.setText(String.valueOf(totalprice[0]));
+        /*String[] blakearray={"blakes"};
+        place_order.setOnClickListener(new BlakesClickListener(blakearray,this));*/
+
+        cartlistref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()){
+                    food_list_details ordr=postSnapshot.getValue(food_list_details.class);
+                    int qty= Integer.parseInt(ordr.quantity);
+                    int price= Integer.parseInt(ordr.price);
+                    int addedprice=qty*price;
+                    totalPrice=totalPrice+addedprice;
+
+                }
+                totprice_value.setText(String.valueOf(totalPrice));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
 
         /*ArrayList<String> foodid_order = new ArrayList<>();
         ArrayList<String> price_order = new ArrayList<>();
@@ -96,7 +120,7 @@ public class cart extends AppCompatActivity {
         priceincart = price_order.toArray(priceincart);
         foodsincart = food_names_order.toArray(foodsincart);
 
-        place_order.setOnClickListener(new BlakesClickListener(priceincart,this));
+
 
         /*DatabaseReference foodlistdatabase=FirebaseDatabase.getInstance().getReference("foodlist");
         int i;

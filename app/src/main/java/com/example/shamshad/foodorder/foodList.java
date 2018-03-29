@@ -117,6 +117,7 @@ public class foodList extends AppCompatActivity {
                 viewHolder.priceview.setText(model.price);
                 Glide.with(foodList.this).load(model.image).into(viewHolder.imageView);
                 final food_list_details food_details = model;
+
                 viewHolder.add_button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -130,6 +131,7 @@ public class foodList extends AppCompatActivity {
                         final DatabaseReference cartref=FirebaseDatabase.getInstance().getReference("user").child(uid).child("cart").child(foodidkey);
                         cartref.child("food_id").setValue(adapter.getRef(position).getKey());
                         cartref.child("quantity").setValue(count);
+                        cartref.child("text").setValue(model.text);
 
                         DatabaseReference priceref=FirebaseDatabase.getInstance().getReference("food_list").child(foodidkey);
                         priceref.addValueEventListener(new ValueEventListener() {
@@ -192,6 +194,7 @@ public class foodList extends AppCompatActivity {
                          DatabaseReference cartref=FirebaseDatabase.getInstance().getReference("user").child(uid).child("cart").child(foodidkey);
                          cartref.child("food_id").setValue(adapter.getRef(position).getKey());
                          cartref.child("quantity").setValue(count);
+                         cartref.child("text").setValue(model.text);
 
                          DatabaseReference priceref=FirebaseDatabase.getInstance().getReference("food_list").child(foodidkey);
                          priceref.addValueEventListener(new ValueEventListener() {
