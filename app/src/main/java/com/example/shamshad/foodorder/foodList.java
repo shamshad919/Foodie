@@ -48,6 +48,8 @@ public class foodList extends AppCompatActivity {
     TextView restaurant_name_foodlist;
     FirebaseRecyclerAdapter<food_list_details, food_viewHolder> adapter;
 
+
+
     ArrayList<String> foodidorder=new ArrayList<>();
     ArrayList<String> priceorder=new ArrayList<>();
     ArrayList<String> foodnametext=new ArrayList<>();
@@ -154,8 +156,6 @@ public class foodList extends AppCompatActivity {
 
                                 }
 
-
-
                             }
 
                             @Override
@@ -183,10 +183,6 @@ public class foodList extends AppCompatActivity {
                          foodnametext.remove(foodidorder.indexOf(foodidkey));
                          qty_orders.remove(foodidorder.indexOf(foodidkey));
                          foodidorder.remove(foodidkey);
-
-
-
-
 
                      }
                      else{

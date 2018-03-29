@@ -98,7 +98,6 @@ public class fooddetails extends AppCompatActivity {
 
                             }
                         });
-
                     }
                 });
 
