@@ -2,9 +2,7 @@ package com.example.shamshad.foodorder;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,15 +11,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.shamshad.foodorder.Interface.ItemClickListener;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.squareup.picasso.Picasso;
 
 
 public class restaurant extends AppCompatActivity {
@@ -76,5 +73,69 @@ public class restaurant extends AppCompatActivity {
         };
 
         recyclerView.setAdapter(firebaseRecyclerAdapter);
+    }
+
+    public static class restaurant_details {
+        String name;
+        String image;
+        String rating;
+
+        public restaurant_details() {
+        }
+
+        public restaurant_details(String name, String image, String rating) {
+            this.name = name;
+            this.image = image;
+            this.rating = rating;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getImage() {
+            return image;
+        }
+
+        public void setImage(String image) {
+            this.image = image;
+        }
+
+        public String getRating() {
+            return rating;
+        }
+
+        public void setRating(String rating) {
+            this.rating = rating;
+        }
+    }
+
+    public static class restaurantviewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        TextView textView;
+        ImageView imageView;
+        TextView rating;
+
+        ItemClickListener itemClickListener;
+
+        public restaurantviewHolder(View itemView) {
+            super(itemView);
+            textView=(TextView) itemView.findViewById(R.id.restaurant_textview);
+            imageView=(ImageView)itemView.findViewById(R.id.restaurant_imageview);
+            rating=(TextView)itemView.findViewById(R.id.rating_restaurant);
+            itemView.setOnClickListener(this);
+        }
+
+        public void setItemClickListener(ItemClickListener itemClickListener) {
+            this.itemClickListener = itemClickListener;
+        }
+
+        @Override
+        public void onClick(View view) {
+            itemClickListener.onCLick(view,getAdapterPosition(),false);
+        }
     }
 }
