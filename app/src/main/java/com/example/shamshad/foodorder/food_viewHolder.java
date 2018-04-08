@@ -12,7 +12,7 @@ import com.example.shamshad.foodorder.Interface.ItemClickListener;
 import com.example.shamshad.foodorder.R;
 
 
-public class food_viewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class food_viewHolder extends RecyclerView.ViewHolder {
     TextView textView;
     ImageView imageView;
     TextView priceview;
@@ -21,9 +21,6 @@ public class food_viewHolder extends RecyclerView.ViewHolder implements View.OnC
     Button add_button;
 
 
-    public void setItemClickListener(ItemClickListener itemClickListener) {
-        this.itemClickListener = itemClickListener;
-    }
 
     public food_viewHolder(View itemView) {
         super(itemView);
@@ -32,12 +29,9 @@ public class food_viewHolder extends RecyclerView.ViewHolder implements View.OnC
         priceview = (TextView) itemView.findViewById(R.id.food_price);
         numberButton_foodlist= (ElegantNumberButton) itemView.findViewById(R.id.quantity_button_foodlist);
         add_button=(Button)itemView.findViewById(R.id.add_button);
-        itemView.setOnClickListener(this);
+
     }
 
-    @Override
-    public void onClick(View view) {
-        itemClickListener.onCLick(view, getAdapterPosition(), false);
-    }
+
 
 }

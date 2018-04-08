@@ -45,18 +45,33 @@
                     android:layout_height="250dp"
                     android:contentDescription="@null"
                     android:scaleType="centerCrop"
-                    app:layout_collapseMode="parallax" />
+                    app:layout_collapseMode="parallax"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:alpha="0.4"
+                    android:background="@color/Black"
+                    />
 
                 <TextView
                     android:id="@+id/name_restaurant_foodlist"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/image_restaurant_foodlist"
                     android:padding="8dp"
                     android:text="ABC"
                     android:textColor="@color/White"
                     android:textSize="30sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentStart="true" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Min order:"
+                    android:id="@+id/min_order"
+                    android:textSize="15sp"
+                    android:padding="8dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"/>
             </RelativeLayout>
 
         </android.support.design.widget.CollapsingToolbarLayout>
@@ -65,7 +80,7 @@
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:clipToPadding="false"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -76,9 +91,7 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_foodview"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:layout_editor_absoluteX="8dp"
-                tools:layout_editor_absoluteY="8dp"></android.support.v7.widget.RecyclerView>
+                android:layout_height="wrap_content" />
         </RelativeLayout>
 
     </android.support.v4.widget.NestedScrollView>

@@ -1,10 +1,14 @@
 package com.example.shamshad.foodorder;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -21,13 +25,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 
-public class cart extends AppCompatActivity {
+public class cart extends AppCompatActivity implements View.OnClickListener{
 
     int totalPrice=0;
-
+    private Context context=cart.this;
     private TextView totprice_value;
     private Button place_order;
     private RecyclerView cartlistView;
+    private BottomNavigationView bottomNavigationView;
     FirebaseRecyclerAdapter<food_list_details,cartViewHolder> cartfirebaseadapter;
 
     @Override
@@ -36,12 +41,19 @@ public class cart extends AppCompatActivity {
         setContentView(R.layout.cart);
         getSupportActionBar().hide();
 
-
+        bottomNavigationView= (BottomNavigationView) findViewById(R.id.navigation_view);
         totprice_value = (TextView) findViewById(R.id.total_price_cart_value);
         cartlistView= (RecyclerView) findViewById(R.id.cartlistview);
         cartlistView.setLayoutManager(new LinearLayoutManager(this));
         cartlistView.setHasFixedSize(true);
         place_order = (Button) findViewById(R.id.place_order_btn);
+
+        place_order.setOnClickListener(this);
+
+        Menu menu=bottomNavigationView.getMenu();
+        MenuItem menuItem=menu.getItem(1);
+        menuItem.setChecked(true);
+        navigationview_helper.enableNavigationView(context,bottomNavigationView);
 
         FirebaseAuth mAuth =FirebaseAuth.getInstance();
         final FirebaseUser user=mAuth.getCurrentUser();
@@ -94,13 +106,17 @@ public class cart extends AppCompatActivity {
         });
 
 
+    }
 
-
-
+    @Override
+    public void onClick(View v) {
+        if(v==place_order){
+            startActivity(new Intent(cart.this,address_selection.class));
+        }
     }
 
 
-    public class BlakesClickListener implements View.OnClickListener {
+   /* public class BlakesClickListener implements View.OnClickListener {
 
         String[] priceincart;
         Context context;
@@ -118,12 +134,10 @@ public class cart extends AppCompatActivity {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 final DatabaseReference orderref = FirebaseDatabase.getInstance().getReference("requests").child(user.getUid());
                 orderref.child("name").setValue(priceincart[0]);
-
-
             }
         }
 
-    }
+    }*/
 
 
 

@@ -8,14 +8,9 @@ public class restaurant_details {
     String name;
     String image;
     String rating;
+    String min_order;
 
     public restaurant_details() {
-    }
-
-    public restaurant_details(String name, String image, String rating) {
-        this.name = name;
-        this.image = image;
-        this.rating = rating;
     }
 
     public String getName() {
@@ -40,5 +35,13 @@ public class restaurant_details {
 
     public void setRating(String rating) {
         this.rating = rating;
+    }
+
+    public String getMin_order() {
+        return min_order;
+    }
+
+    public void setMin_order(String min_order) {
+        this.min_order = min_order;
     }
 }

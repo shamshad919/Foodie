@@ -26,39 +26,52 @@
     </android.support.v7.widget.RecyclerView>
 
     <RelativeLayout
-        android:layout_gravity="bottom"
         android:layout_width="match_parent"
-        android:padding="6dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/total_price_cart_text"
-        android:textSize="24dp"
-        android:padding="10dp"
-        android:text="TOTAL PRICE"
-        />
-    <TextView
-        android:layout_alignParentRight="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/total_price_cart_value"
-        android:textSize="20sp"
-        android:padding="10dp"
-        android:text="1000$"/>
+        android:layout_gravity="bottom"
+        android:layout_weight="0"
+        android:padding="6dp">
+
+        <TextView
+            android:id="@+id/total_price_cart_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textColor="@color/White"
+            android:text="TOTAL PRICE"
+            android:textSize="24dp" />
+
+        <TextView
+            android:id="@+id/total_price_cart_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:padding="10dp"
+            android:text="1000$"
+            android:textColor="@color/White"
+            android:textSize="20sp" />
 
         <Button
-            android:layout_below="@+id/total_price_cart_text"
             android:id="@+id/place_order_btn"
-            android:background="@drawable/rounded_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="PLACE ORDER" />
+            android:layout_below="@+id/total_price_cart_text"
+            android:background="@drawable/rounded_button"
+            android:text="PLACE ORDER"
+            android:textColor="@color/White"/>
 
     </RelativeLayout>
 
-
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/place_order_btn"
+        android:layout_gravity="bottom"
+        android:background="@color/colorPrimary"
+        app:itemIconTint="@color/nav_color_selector"
+        app:itemTextColor="@color/nav_color_selector"
+        app:menu="@menu/nav_menu"></android.support.design.widget.BottomNavigationView>
 
 
 </LinearLayout>

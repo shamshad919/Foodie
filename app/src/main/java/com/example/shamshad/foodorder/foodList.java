@@ -32,9 +32,10 @@ import java.util.ArrayList;
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 
 
-public class foodList extends AppCompatActivity {
+public class foodList extends AppCompatActivity implements View.OnClickListener {
     private  TextView cart_count;
     private  TextView total_price;
+    private TextView min_price;
     private  Button add_cart;
     private Button view_cart;
     private BottomNavigationView bottomNavigationView;
@@ -61,6 +62,7 @@ public class foodList extends AppCompatActivity {
         setContentView(R.layout.foodview);
         getSupportActionBar().hide();
 
+        min_price= (TextView) findViewById(R.id.min_order);
         add_cart= (Button) findViewById(R.id.add_cart_button);
         bottomNavigationView= (BottomNavigationView) findViewById(R.id.bottom_navigation_cart);
         restaurant_name_foodlist = (TextView) findViewById(R.id.name_restaurant_foodlist);
@@ -72,6 +74,8 @@ public class foodList extends AppCompatActivity {
         cart_count= (TextView) findViewById(R.id.cart_count);
         total_price= (TextView) findViewById(R.id.total_price);
         view_cart=(Button) findViewById(R.id.add_cart_button);
+
+        view_cart.setOnClickListener(this);
 
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_foodlist);
         collapsingToolbarLayout.setExpandedTitleColor(R.style.ExpandedAppbar);
@@ -96,6 +100,7 @@ public class foodList extends AppCompatActivity {
                 final restaurant_details restaurant = dataSnapshot.getValue(restaurant_details.class);
                 restaurant_name_foodlist.setText(restaurant.getName());
                 Glide.with(getBaseContext()).load(restaurant.getImage()).into(restaurant_image_foodlist);
+                min_price.setText("Min order:"+restaurant.getMin_order());
             }
 
             @Override
@@ -231,25 +236,11 @@ public class foodList extends AppCompatActivity {
                      }
                  }
              });
-                view_cart.setOnClickListener(new View.OnClickListener() {
+
+
+                viewHolder.imageView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent cart=new Intent(foodList.this,cart.class);
-
-                        Bundle args = new Bundle();
-                        args.putSerializable("foodid_order",(Serializable)foodidorder);
-                        args.putSerializable("price_order",(Serializable)priceorder);
-                        args.putSerializable("food_names_order",(Serializable)foodnametext);
-                        args.putSerializable("qty_order",(Serializable)qty_orders);
-                        cart.putExtra("BUNDLE",args);
-
-                        startActivity(cart);
-                    }
-                });
-
-                viewHolder.setItemClickListener(new ItemClickListener() {
-                    @Override
-                    public void onCLick(View view, int position, boolean isLongCLick) {
                         Intent fooddetails = new Intent(foodList.this, fooddetails.class);
                         fooddetails.putExtra("Foodid", adapter.getRef(position).getKey());
                         startActivity(fooddetails);
@@ -261,4 +252,11 @@ public class foodList extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
+    @Override
+    public void onClick(View v) {
+        if (v==view_cart){
+            Intent cart=new Intent(foodList.this,cart.class);
+            startActivity(cart);
+        }
+    }
 }
