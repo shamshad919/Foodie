@@ -1,10 +1,13 @@
 package com.example.shamshad.foodorder;
 
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -34,8 +37,9 @@ public class address_selection extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.address_selection);
         getSupportActionBar().hide();
 
-        address_select=findViewById(R.id.)
-        continue_address_selection = (Button) findViewById(R.id.continue_address_selection);
+       final String total= getIntent().getStringExtra("Total");
+        final String quantity=getIntent().getStringExtra("Quantity");
+        continue_address_selection = (Button) findViewById(R.id.addnewaddress_selection);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_address_selection);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
@@ -50,13 +54,23 @@ public class address_selection extends AppCompatActivity implements View.OnClick
                 addressViewHolder.class,
                 mRef) {
             @Override
-            protected void populateViewHolder(final addressViewHolder viewHolder, addressDetails model, final int position) {
+            protected void populateViewHolder(final addressViewHolder viewHolder, final addressDetails model, final int position) {
                 viewHolder.textView.setText(model.name);
                 viewHolder.deletebutton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         DatabaseReference addref=FirebaseDatabase.getInstance().getReference("user").child(user.getUid()).child("address").child(firebaseRecyclerAdapter.getRef(position).getKey());
                         addref.removeValue();
+                    }
+                });
+                viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent=new Intent(address_selection.this,order_details.class);
+                        intent.putExtra("delivery address",model.name);
+                        intent.putExtra("Total",total);
+                        intent.putExtra("Quantity",quantity);
+                        startActivity(intent);
                     }
                 });
             }
@@ -67,8 +81,31 @@ public class address_selection extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        if(v== continue_address_selection){
 
+        if(v== continue_address_selection){
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(address_selection.this);
+            alertDialog.setTitle("New Addresss");
+            alertDialog.setMessage("Enter New Address");
+            final EditText input = new EditText(address_selection.this);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT);
+            input.setLayoutParams(lp);
+            alertDialog.setView(input);
+
+            alertDialog.setPositiveButton("ADD",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            final String address =((input.getText().toString()));
+                            if(!(address.isEmpty())) {
+                                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                final DatabaseReference cartref = FirebaseDatabase.getInstance().getReference("user").child(user.getUid()).child("address").push();
+                                cartref.child("name").setValue(address);
+                            }
+                        }
+                    });
+
+            alertDialog.show();
         }
     }
 
@@ -116,11 +153,12 @@ public class address_selection extends AppCompatActivity implements View.OnClick
     }
 
     public static class addressViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-
+        CardView cardView;
         TextView textView;
         ImageView deletebutton;
         public addressViewHolder(View itemView) {
             super(itemView);
+            cardView=(CardView) itemView.findViewById(R.id.cardview_address_selection);
             deletebutton= (ImageView) itemView.findViewById(R.id.address_selection_delete);
             textView=(TextView) itemView.findViewById(R.id.address_selection_textview_recycler);
 

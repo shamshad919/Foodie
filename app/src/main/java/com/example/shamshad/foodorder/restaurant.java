@@ -65,7 +65,6 @@ public class restaurant extends AppCompatActivity {
                     public void onCLick(View view, int position, boolean isLongCLick) {
                         Intent intent = new Intent(restaurant.this, foodList.class);
                         intent.putExtra("restaurant_name", firebaseRecyclerAdapter.getRef(position).getKey());
-                        Log.d("TAG", "" + firebaseRecyclerAdapter.getRef(position).getKey());
                         startActivity(intent);
                     }
                 });

@@ -34,7 +34,7 @@ public class cart extends AppCompatActivity implements View.OnClickListener{
     private RecyclerView cartlistView;
     private BottomNavigationView bottomNavigationView;
     FirebaseRecyclerAdapter<food_list_details,cartViewHolder> cartfirebaseadapter;
-
+    int quantity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +88,7 @@ public class cart extends AppCompatActivity implements View.OnClickListener{
         cartlistref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()){
                     food_list_details ordr=postSnapshot.getValue(food_list_details.class);
                     int qty= Integer.parseInt(ordr.quantity);
@@ -111,35 +112,12 @@ public class cart extends AppCompatActivity implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         if(v==place_order){
-            startActivity(new Intent(cart.this,address_selection.class));
+           Intent intent=new Intent(cart.this,address_selection.class);
+            intent.putExtra("Total",totprice_value.getText());
+            intent.putExtra("Quantity",quantity);
+            startActivity(intent);
         }
     }
-
-
-   /* public class BlakesClickListener implements View.OnClickListener {
-
-        String[] priceincart;
-        Context context;
-
-        public BlakesClickListener(String[] priceincart,Context context) {
-            this.priceincart = priceincart;
-            this.context=context;
-        }
-
-        @Override
-        public void onClick(View view) {
-            if (view == place_order) {
-                Toast.makeText(context,"YAYA"+priceincart[0],Toast.LENGTH_SHORT).show();
-
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                final DatabaseReference orderref = FirebaseDatabase.getInstance().getReference("requests").child(user.getUid());
-                orderref.child("name").setValue(priceincart[0]);
-            }
-        }
-
-    }*/
-
-
 
     public static class cartViewHolder extends RecyclerView.ViewHolder {
         ImageView cart_delete_button;
@@ -152,10 +130,7 @@ public class cart extends AppCompatActivity implements View.OnClickListener{
             quantitytextView=itemView.findViewById(R.id.qty_textview);
             pricetextView=itemView.findViewById(R.id.price_in_cartlist);
             cart_delete_button=itemView.findViewById(R.id.cart_delete_button);
-
         }
-
-
     }
 }
 
