@@ -34,7 +34,9 @@
         <activity android:name=".address" />
         <activity android:name=".address_selection" />
         <activity android:name=".order_summary" />
-        <activity android:name=".order_details"></activity>
+        <activity android:name=".order_details" />
+        <activity android:name=".PaymentDetails" />
+        <activity android:name=".payment_selection"></activity>
     </application>
 
 </manifest>
