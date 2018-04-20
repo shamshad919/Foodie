@@ -2,10 +2,13 @@ package com.example.shamshad.foodorder;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.paypal.android.sdk.payments.PayPalConfiguration;
@@ -23,7 +26,10 @@ import static com.example.shamshad.foodorder.R.id.total_price;
 
 public class payment_selection extends AppCompatActivity {
 
-    private Button paypal;
+    private ImageButton paypal_logo;
+    private TextView paypal_text;
+    private ImageButton cash_logo;
+    private TextView cash_text;
     public static  final int PAYPAL_REQUEST_CODE=7171;
     private static PayPalConfiguration Config=new PayPalConfiguration()
             .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)//Use sandbox
@@ -46,9 +52,18 @@ public class payment_selection extends AppCompatActivity {
         Intent intent=new Intent(this,PayPalService.class);
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,Config);
         startService(intent);
-        paypal= (Button) findViewById(R.id.pay_with_paypal);
+        paypal_text= (TextView) findViewById(R.id.paypal_text);
+        paypal_logo= (ImageButton) findViewById(R.id.paypal_logo);
+        cash_text= (TextView) findViewById(R.id.cash_text);
+        cash_logo= (ImageButton) findViewById(R.id.cash_logo);
         total_price =1;
-        paypal.setOnClickListener(new View.OnClickListener() {
+        paypal_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                processpayment();
+            }
+        });
+        paypal_logo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 processpayment();
