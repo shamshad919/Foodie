@@ -35,6 +35,7 @@ import static android.R.attr.process;
 import static com.example.shamshad.foodorder.R.id.start;
 import static com.example.shamshad.foodorder.R.id.total_price;
 import static com.example.shamshad.foodorder.R.id.total_price_cart_value;
+import static com.example.shamshad.foodorder.payment_selection.PAYPAL_REQUEST_CODE;
 import static com.paypal.android.sdk.fb.c;
 
 public class order_details extends AppCompatActivity {
@@ -44,29 +45,15 @@ public class order_details extends AppCompatActivity {
     private TextView total;
     private TextView quantity;
     private DatabaseReference cart_count;
-
-    public static  final int PAYPAL_REQUEST_CODE=7171;
-    private static PayPalConfiguration Config=new PayPalConfiguration()
-            .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)//Use sandbox
-            .clientId(config.PAYPAL_CLIENT_ID);
-
     String total_price;
 
-    @Override
-    protected void onDestroy() {
-        stopService(new Intent(this,PayPalService.class));
-        super.onDestroy();
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order_details);
         getSupportActionBar().hide();
-        //start paypal service
-        Intent intent=new Intent(this,PayPalService.class);
-        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,Config);
-        startService(intent);
+
 
         String delivery_address = getIntent().getStringExtra("delivery address");
         total_price=getIntent().getStringExtra("Total");
@@ -90,37 +77,4 @@ public class order_details extends AppCompatActivity {
 
     }
 
-    private void processpayment() {
-        PayPalPayment paypalpayment=new PayPalPayment((new BigDecimal(String.valueOf(total_price))),"USD", "Payment",PayPalPayment.PAYMENT_INTENT_SALE);
-        Intent intent=new Intent(order_details.this, PaymentActivity.class);
-        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,Config);
-        intent.putExtra(PaymentActivity.EXTRA_PAYMENT,paypalpayment);
-        startActivity(intent);
-
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode==PAYPAL_REQUEST_CODE){
-            if(resultCode==RESULT_OK){
-                PaymentConfirmation confirmation=data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
-                if(confirmation != null){
-                    try{
-                        String  paymentdetails = confirmation.toJSONObject().toString(4);
-                        startActivity(new Intent(this,PaymentDetails.class)
-                                .putExtra("PaymentDetails",paymentdetails)
-                                .putExtra("PaymentAmount",total_price));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-            else if(resultCode==Activity.RESULT_CANCELED){
-                Toast.makeText(this,"Cancelled",Toast.LENGTH_LONG).show();
-            }
-        }
-        else if(requestCode==PaymentActivity.RESULT_EXTRAS_INVALID){
-            Toast.makeText(this,"Invalid",Toast.LENGTH_SHORT).show();;
-        }
-    }
 }

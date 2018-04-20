@@ -5,5 +5,5 @@ package com.example.shamshad.foodorder;
  */
 
 public class config {
-    public static final String PAYPAL_CLIENT_ID="AQKe5kAq5zQkRwhIrBcgzjgQ5C1XUo-OugdfQWGEgfqZWSC_lMjbkv1CLvTt_hPQcHWucq29Yg4f_YCt";
+    public static final String PAYPAL_CLIENT_ID="AZI7QQ2Gnrrx_mYHNO4xTug6g4uHgh1oXww7JWy2ncsbxSe2qufwlVvsM_xPLnFXPddBIBXYulgxBfmz";
 }

@@ -34,7 +34,7 @@ public class payment_selection extends AppCompatActivity {
         stopService(new Intent(this,PayPalService.class));
         super.onDestroy();
     }
-    private String total_price="";
+    private int total_price;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,7 @@ public class payment_selection extends AppCompatActivity {
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,Config);
         startService(intent);
         paypal= (Button) findViewById(R.id.pay_with_paypal);
-        total_price =getIntent().getStringExtra("Amount");
+        total_price =1;
         paypal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,10 +58,10 @@ public class payment_selection extends AppCompatActivity {
 
     private void processpayment() {
         PayPalPayment paypalpayment=new PayPalPayment((new BigDecimal(String.valueOf(total_price))),"USD", "Payment",PayPalPayment.PAYMENT_INTENT_SALE);
-        Intent intent=new Intent(payment_selection.this, PaymentActivity.class);
+        Intent intent=new Intent(this, PaymentActivity.class);
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,Config);
         intent.putExtra(PaymentActivity.EXTRA_PAYMENT,paypalpayment);
-        startActivity(intent);
+        startActivityForResult(intent,PAYPAL_REQUEST_CODE);
 
     }
     @Override
@@ -79,6 +79,7 @@ public class payment_selection extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
+
             }
             else if(resultCode== Activity.RESULT_CANCELED){
                 Toast.makeText(this,"Cancelled",Toast.LENGTH_LONG).show();
