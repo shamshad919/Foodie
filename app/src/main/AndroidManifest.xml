@@ -36,7 +36,9 @@
         <activity android:name=".order_summary" />
         <activity android:name=".order_details" />
         <activity android:name=".PaymentDetails" />
-        <activity android:name=".payment_selection"></activity>
+        <activity android:name=".payment_selection" />
+        <activity android:name=".paymentDetails_cod" />
+        <activity android:name=".order"></activity>
     </application>
 
 </manifest>

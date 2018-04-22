@@ -27,6 +27,7 @@ public class account_details extends AppCompatActivity implements View.OnClickLi
     private Button address;
     private Button signout;
     private Button cart;
+    private Button order;
     private TextView name;
     private TextView email;
 
@@ -45,10 +46,12 @@ public class account_details extends AppCompatActivity implements View.OnClickLi
         cart= (Button) findViewById(R.id.account_details_cart);
         name= (TextView) findViewById(R.id.account_details_name);
         email= (TextView) findViewById(R.id.account_details_email);
+        order= (Button) findViewById(R.id.account_details_order);
 
         signout.setOnClickListener(this);
         cart.setOnClickListener(this);
         address.setOnClickListener(this);
+        order.setOnClickListener(this);
 
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -95,6 +98,9 @@ public class account_details extends AppCompatActivity implements View.OnClickLi
         }
         if(v==address){
             startActivity(new Intent(account_details.this,address.class));
+        }
+        if(v==order){
+            startActivity(new Intent(account_details.this,order.class));
         }
     }
 

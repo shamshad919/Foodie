@@ -111,11 +111,29 @@ public class cart extends AppCompatActivity implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        if(v==place_order){
-           Intent intent=new Intent(cart.this,address_selection.class);
-            intent.putExtra("Total",totprice_value.getText());
-            intent.putExtra("Quantity",quantity);
-            startActivity(intent);
+        if(v==place_order) {
+            FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+            DatabaseReference cart=FirebaseDatabase.getInstance().getReference("user").child(user.getUid());
+            cart.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.hasChild("cart")){
+                        Intent intent=new Intent(cart.this,address_selection.class);
+                        intent.putExtra("Total",totprice_value.getText());
+                        intent.putExtra("Quantity",quantity);
+                        startActivity(intent);
+                    }
+                    else{
+                        Toast.makeText(cart.this,"No Items on Cart",Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
         }
     }
 

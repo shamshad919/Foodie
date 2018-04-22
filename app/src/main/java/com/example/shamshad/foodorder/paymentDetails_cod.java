@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -16,22 +15,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import static android.R.attr.order;
 
-public class PaymentDetails extends AppCompatActivity {
+public class paymentDetails_cod extends AppCompatActivity {
+
     private Button home;
-    private TextView textId,textAmount,textStatus;
     private DatabaseReference databaseReference;
     private DatabaseReference order;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.payment_details);
-
-        textId= (TextView) findViewById(R.id.textId);
-        textAmount= (TextView) findViewById(R.id.textAmount);
-        textStatus= (TextView) findViewById(R.id.textStatus);
+        setContentView(R.layout.payment_details_cod);
+        getSupportActionBar().hide();
 
         FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
         String uid=user.getUid();
@@ -51,7 +46,7 @@ public class PaymentDetails extends AppCompatActivity {
                         }
                     }
                 });
-                }
+            }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -63,26 +58,8 @@ public class PaymentDetails extends AppCompatActivity {
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(PaymentDetails.this,restaurant.class));
+                startActivity(new Intent(paymentDetails_cod.this,restaurant.class));
             }
         });
-        //Get Intent
-        Intent intent=getIntent();
-
-        try{
-            JSONObject jsonObject=new JSONObject(intent.getStringExtra("PaymentDetails"));
-            showDetails(jsonObject.getJSONObject("response"),intent.getStringExtra("PaymentAmount"));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void showDetails(JSONObject response, String paymentAmount) {
-        try {
-            textId.setText(response.getString("id"));
-            textStatus.setText(response.getString("state"));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
     }
 }

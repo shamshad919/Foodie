@@ -23,6 +23,7 @@
         <TextView
             android:id="@+id/address_textview_recycler"
             android:layout_width="280dp"
+            android:textColor="@color/Black"
             android:layout_height="80dp"
             android:textAlignment="textStart"
             android:layout_alignBaseline="@+id/radioButton"

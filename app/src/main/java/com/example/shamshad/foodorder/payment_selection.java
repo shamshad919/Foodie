@@ -49,7 +49,7 @@ public class payment_selection extends AppCompatActivity {
         getSupportActionBar().hide();
 
         //start paypal service
-        Intent intent=new Intent(this,PayPalService.class);
+        final Intent intent=new Intent(this,PayPalService.class);
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,Config);
         startService(intent);
         paypal_text= (TextView) findViewById(R.id.paypal_text);
@@ -67,6 +67,20 @@ public class payment_selection extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 processpayment();
+            }
+        });
+        cash_logo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(payment_selection.this,paymentDetails_cod.class);
+                startActivity(intent);
+            }
+        });
+        cash_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(payment_selection.this,paymentDetails_cod.class);
+                startActivity(intent);
             }
         });
     }

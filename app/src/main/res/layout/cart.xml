@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:padding="10dp"
-            android:text="1000$"
+            android:text="0"
             android:textColor="@color/White"
             android:textSize="20sp" />
 

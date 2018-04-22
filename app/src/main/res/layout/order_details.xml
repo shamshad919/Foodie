@@ -15,6 +15,7 @@
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:textSize="25sp"
+        android:textColor="@color/Black"
         android:layout_height="wrap_content"
         android:text="Order Summary"
         android:id="@+id/ordersummary" />
@@ -23,55 +24,44 @@
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:id="@+id/delivery_address_orderdetails"
-         android:text="Delivery Address"
-         android:textSize="15sp"
+         android:text="Delivery Address:"
+         android:textSize="20sp"
+         android:textColor="@color/Black"
          android:layout_below="@+id/ordersummary"
          android:layout_alignParentStart="true"
-         android:layout_marginTop="11dp" />
+         android:layout_marginTop="60dp" />
       <TextView
           android:layout_width="wrap_content"
           android:layout_alignBaseline="@id/delivery_address_orderdetails"
           android:layout_height="wrap_content"
+          android:textColor="@color/Black"
           android:id="@+id/address_orderdetails"
           android:layout_below="@id/delivery_address_orderdetails"
           android:layout_toEndOf="@id/delivery_address_orderdetails"
-          android:layout_marginLeft="30dp"/>
-        <TextView
+          android:layout_marginLeft="30dp"
+          android:textSize="20sp"/>
 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/quantity_orderdetails"
-            android:text="Qunatity"
-            android:textSize="15sp"
-            android:layout_below="@+id/delivery_address_orderdetails"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="11dp" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_alignBaseline="@id/quantity_orderdetails"
-            android:layout_height="wrap_content"
-            android:id="@+id/quantity_text_orderdetails"
-            android:layout_below="@id/quantity_orderdetails"
-            android:layout_toEndOf="@id/quantity_orderdetails"
-            android:layout_marginLeft="30dp"/>
         <TextView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/total_orderdetails"
-            android:text="Total :"
-            android:textSize="15sp"
-            android:layout_below="@+id/quantity_orderdetails"
+            android:text="Total              :"
+            android:textSize="25sp"
+            android:textColor="@color/Black"
+            android:layout_below="@+id/delivery_address_orderdetails"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="11dp" />
+            android:layout_marginTop="50dp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_alignBaseline="@id/total_orderdetails"
             android:layout_height="wrap_content"
+            android:textSize="20sp"
             android:id="@+id/total_text_orderdetails"
             android:layout_below="@id/total_orderdetails"
             android:layout_toEndOf="@id/total_orderdetails"
-            android:layout_marginLeft="30dp"/>
+            android:layout_marginLeft="30dp"
+            android:textColor="@color/Black"/>
      <Button
          android:layout_width="match_parent"
          android:layout_height="wrap_content"

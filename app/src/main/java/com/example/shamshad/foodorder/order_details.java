@@ -43,7 +43,7 @@ public class order_details extends AppCompatActivity {
     private TextView address_order;
     private Button place_order;
     private TextView total;
-    private TextView quantity;
+
     private DatabaseReference cart_count;
     String total_price;
 
@@ -59,7 +59,7 @@ public class order_details extends AppCompatActivity {
         total_price=getIntent().getStringExtra("Total");
         address_order= (TextView) findViewById(R.id.address_orderdetails);
         total= (TextView) findViewById(R.id.total_text_orderdetails);
-        quantity= (TextView) findViewById(R.id.quantity_text_orderdetails);
+
         address_order.setText(delivery_address);
         place_order= (Button) findViewById(R.id.placeorder_orderdetails);
         FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.shamshad.foodorder.PaymentDetails">
+    tools:context="com.example.shamshad.foodorder.paymentDetails_cod">
 
 
     <TextView
@@ -26,35 +26,6 @@
         android:id="@+id/tick_image"
         android:src="@drawable/tick"
         android:scaleType="centerInside"/>
-    <LinearLayout
-        android:id="@+id/linear_layout_paymentDetails"
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_below="@+id/tick_image"
-        android:layout_marginTop="10dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textId"
-            android:textColor="@color/Black"
-            android:textStyle="bold"/>
-        <TextView
-            android:textStyle="bold"
-            android:textColor="@color/Black"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textAmount"/>
-        <TextView
-            android:textStyle="bold"
-            android:textColor="@color/Black"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textStatus"/>
-
-    </LinearLayout>
     <Button
         android:id="@+id/homebutton"
         android:layout_width="match_parent"
