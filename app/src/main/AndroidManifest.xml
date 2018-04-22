@@ -33,7 +33,6 @@
         <activity android:name=".account_details" />
         <activity android:name=".address" />
         <activity android:name=".address_selection" />
-        <activity android:name=".order_summary" />
         <activity android:name=".order_details" />
         <activity android:name=".PaymentDetails" />
         <activity android:name=".payment_selection" />

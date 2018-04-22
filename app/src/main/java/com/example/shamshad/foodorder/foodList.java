@@ -199,17 +199,6 @@ public class foodList extends AppCompatActivity implements View.OnClickListener 
 
 
 
-                                 /*if(foodidorder.contains(foodidkey)){
-                                     priceorder.set(foodidorder.indexOf(foodidkey), String.valueOf(total));
-                                     qty_orders.set(foodidorder.indexOf(foodidkey),String.valueOf(count));
-                                 }
-                                 else{
-                                     foodidorder.add(foodidkey);
-                                     priceorder.add(String.valueOf(total));
-                                     foodnametext.add(foodname);
-                                     qty_orders.add(String.valueOf(count));
-                                 }*/
-
 
                              }
 
