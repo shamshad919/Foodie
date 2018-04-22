@@ -63,7 +63,7 @@ public class order_details extends AppCompatActivity {
         address_order.setText(delivery_address);
         place_order= (Button) findViewById(R.id.placeorder_orderdetails);
         FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
-        total.setText(total_price);
+        total.setText("Rs "+total_price);
         cart_count=FirebaseDatabase.getInstance().getReference("user").child(user.getUid()).child("cart");
         place_order.setOnClickListener(new View.OnClickListener() {
             @Override

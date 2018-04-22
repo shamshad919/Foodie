@@ -17,15 +17,23 @@
         android:textColor="@color/Black"
         android:id="@+id/order_successful"/>
     <ImageView
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/order_successful"
+
         android:layout_centerHorizontal="true"
         android:background="@color/whitetransparent"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="300dp"
+        android:layout_centerVertical="true"
+        android:layout_height="300dp"
         android:id="@+id/tick_image"
         android:src="@drawable/tick"
         android:scaleType="centerInside"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tick_image"
+        android:text="Your order has been successfully processed and you will shortly receive your orders.    Thank you"
+        android:textSize="20sp"
+        android:textColor="@color/Black"
+        android:textAlignment="center"/>
     <Button
         android:id="@+id/homebutton"
         android:layout_width="match_parent"

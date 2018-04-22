@@ -97,7 +97,7 @@ public class cart extends AppCompatActivity implements View.OnClickListener{
                     totalPrice=totalPrice+addedprice;
 
                 }
-                totprice_value.setText(String.valueOf(totalPrice));
+                totprice_value.setText(String.valueOf("Rs "+ totalPrice));
             }
 
             @Override

@@ -22,6 +22,7 @@
         android:layout_centerHorizontal="true"
         android:background="@color/whitetransparent"
         android:layout_width="200dp"
+        android:layout_centerVertical="true"
         android:layout_height="200dp"
         android:id="@+id/tick_image"
         android:src="@drawable/tick"
@@ -55,6 +56,15 @@
             android:id="@+id/textStatus"/>
 
     </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear_layout_paymentDetails"
+        android:text="Your order has been successfully processed and you will shortly receive your orders.    Thank you"
+        android:textSize="20"
+        android:textColor="@color/Black"
+        android:textAlignment="center"/>
     <Button
         android:id="@+id/homebutton"
         android:layout_width="match_parent"
