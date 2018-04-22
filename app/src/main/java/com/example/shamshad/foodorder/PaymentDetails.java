@@ -35,7 +35,8 @@ public class PaymentDetails extends AppCompatActivity {
 
         FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
         String uid=user.getUid();
-        databaseReference= FirebaseDatabase.getInstance().getReference("user").child(uid).child("cart");
+
+        databaseReference= FirebaseDatabase.getInstance().getReference("user").child(uid).child("cart").child("items");
         order=FirebaseDatabase.getInstance().getReference("user").child(uid).child("order");
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

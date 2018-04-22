@@ -32,6 +32,7 @@ import org.w3c.dom.Text;
 import java.math.BigDecimal;
 
 import static android.R.attr.process;
+import static com.example.shamshad.foodorder.R.id.add;
 import static com.example.shamshad.foodorder.R.id.start;
 import static com.example.shamshad.foodorder.R.id.total_price;
 import static com.example.shamshad.foodorder.R.id.total_price_cart_value;
@@ -55,14 +56,18 @@ public class order_details extends AppCompatActivity {
         getSupportActionBar().hide();
 
 
-        String delivery_address = getIntent().getStringExtra("delivery address");
+        final String delivery_address = getIntent().getStringExtra("delivery address");
+
+        FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+
+        DatabaseReference address=FirebaseDatabase.getInstance().getReference("user").child(user.getUid()).child("cart");
+        address.child("address").setValue(delivery_address);
         total_price=getIntent().getStringExtra("Total");
         address_order= (TextView) findViewById(R.id.address_orderdetails);
         total= (TextView) findViewById(R.id.total_text_orderdetails);
 
         address_order.setText(delivery_address);
         place_order= (Button) findViewById(R.id.placeorder_orderdetails);
-        FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
         total.setText("Rs "+total_price);
         cart_count=FirebaseDatabase.getInstance().getReference("user").child(user.getUid()).child("cart");
         place_order.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +75,7 @@ public class order_details extends AppCompatActivity {
             public void onClick(View v) {
                Intent intent=new Intent(order_details.this,payment_selection.class);
                intent.putExtra("Amount",total_price);
+                intent.putExtra("delivery address",delivery_address);
                startActivity(intent);
             }
         });

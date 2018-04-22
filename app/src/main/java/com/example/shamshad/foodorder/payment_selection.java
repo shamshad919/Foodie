@@ -48,6 +48,7 @@ public class payment_selection extends AppCompatActivity {
         setContentView(R.layout.payment_selection);
         getSupportActionBar().hide();
 
+
         //start paypal service
         final Intent intent=new Intent(this,PayPalService.class);
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,Config);

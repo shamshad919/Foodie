@@ -103,8 +103,13 @@ public class foodList extends AppCompatActivity implements View.OnClickListener 
             }
         });
 
+        FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference cart= FirebaseDatabase.getInstance().getReference("user").child(user.getUid()).child("cart");
+        cart.child("restaurant").setValue(restaurant_name);
+
+        final DatabaseReference cartref1=FirebaseDatabase.getInstance().getReference("user").child(user.getUid()).child("cart").child("items");
+        cartref1.removeValue();
         mAuth = FirebaseAuth.getInstance();
-        FirebaseUser user =mAuth.getCurrentUser();
         final String uid=user.getUid();
         adapter = new FirebaseRecyclerAdapter<food_list_details, food_viewHolder>(food_list_details.class,
                 R.layout.food_listrow,
@@ -127,10 +132,11 @@ public class foodList extends AppCompatActivity implements View.OnClickListener 
                         final String count=viewHolder.numberButton_foodlist.getNumber();
                         final String foodidkey=adapter.getRef(position).getKey();
                         cart_count.setText(viewHolder.numberButton_foodlist.getNumber()+" Items");
-                        final DatabaseReference cartref=FirebaseDatabase.getInstance().getReference("user").child(uid).child("cart").child(foodidkey);
+                        final DatabaseReference cartref=FirebaseDatabase.getInstance().getReference("user").child(uid).child("cart").child("items").child(foodidkey);
                         cartref.child("food_id").setValue(adapter.getRef(position).getKey());
                         cartref.child("quantity").setValue(count);
                         cartref.child("text").setValue(model.text);
+
 
                         DatabaseReference priceref=FirebaseDatabase.getInstance().getReference("food_list").child(foodidkey);
                         priceref.addValueEventListener(new ValueEventListener() {
@@ -143,19 +149,6 @@ public class foodList extends AppCompatActivity implements View.OnClickListener 
                                 cartref.child("price").setValue(price);
 
 
-
-                                /*if(foodidorder.contains(foodidkey)){
-                                    priceorder.set(foodidorder.indexOf(foodidkey), String.valueOf(total));
-                                    qty_orders.set(foodidorder.indexOf(foodidkey),String.valueOf(count));
-
-                                }
-                                else{
-                                    foodidorder.add(foodidkey);
-                                    priceorder.add(String.valueOf(total));
-                                    foodnametext.add(foodname);
-                                    qty_orders.add(count);
-
-                                }*/
 
                             }
 
@@ -180,17 +173,14 @@ public class foodList extends AppCompatActivity implements View.OnClickListener 
                          DatabaseReference cartref=FirebaseDatabase.getInstance().getReference("user").child(uid).child("cart").child(adapter.getRef(position).getKey());
                          cartref.removeValue();
 
-                         /*priceorder.remove(foodidorder.indexOf(foodidkey));
-                         foodnametext.remove(foodidorder.indexOf(foodidkey));
-                         qty_orders.remove(foodidorder.indexOf(foodidkey));
-                         foodidorder.remove(foodidkey);*/
 
                      }
                      else{
                          final String foodidkey=adapter.getRef(position).getKey();
                          final String count=viewHolder.numberButton_foodlist.getNumber();
                          cart_count.setText(viewHolder.numberButton_foodlist.getNumber()+" Items");
-                         final DatabaseReference cartref=FirebaseDatabase.getInstance().getReference("user").child(uid).child("cart").child(foodidkey);
+                         final DatabaseReference cartref=FirebaseDatabase.getInstance().getReference("user").child(uid).child("cart").child("items").child(foodidkey);
+                         cartref.removeValue();
                          cartref.child("food_id").setValue(adapter.getRef(position).getKey());
                          cartref.child("quantity").setValue(count);
                          cartref.child("text").setValue(model.text);

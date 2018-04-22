@@ -30,6 +30,7 @@ public class account_details extends AppCompatActivity implements View.OnClickLi
     private Button order;
     private TextView name;
     private TextView email;
+    private Button requests;
 
     private Context context=account_details.this;
     private FirebaseAuth mAuth;
@@ -47,6 +48,7 @@ public class account_details extends AppCompatActivity implements View.OnClickLi
         name= (TextView) findViewById(R.id.account_details_name);
         email= (TextView) findViewById(R.id.account_details_email);
         order= (Button) findViewById(R.id.account_details_order);
+        requests= (Button) findViewById(R.id.account_details_requests);
 
         signout.setOnClickListener(this);
         cart.setOnClickListener(this);

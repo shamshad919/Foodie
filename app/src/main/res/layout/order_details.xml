@@ -39,7 +39,7 @@
           android:layout_below="@id/delivery_address_orderdetails"
           android:layout_toEndOf="@id/delivery_address_orderdetails"
           android:layout_marginLeft="30dp"
-          android:textSize="20sp"/>
+          android:textSize="18sp"/>
 
         <TextView
 
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/total_orderdetails"
             android:text="Total              :"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:textColor="@color/Black"
             android:layout_below="@+id/delivery_address_orderdetails"
             android:layout_alignParentStart="true"
@@ -56,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_alignBaseline="@id/total_orderdetails"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:id="@+id/total_text_orderdetails"
             android:layout_below="@id/total_orderdetails"
             android:layout_toEndOf="@id/total_orderdetails"

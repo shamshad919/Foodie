@@ -8,13 +8,14 @@
     android:background="@drawable/blue3">
 
 
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_restaurant"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
     </android.support.v7.widget.RecyclerView>
+
+
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation_view"
@@ -23,7 +24,9 @@
         android:layout_gravity="bottom"
         android:background="@color/colorPrimary"
         app:menu="@menu/nav_menu"
+        android:layout_below="@id/recycler_restaurant"
         app:itemIconTint="@color/nav_color_selector"
         app:itemTextColor="@color/nav_color_selector">
     </android.support.design.widget.BottomNavigationView>
+
 </android.support.design.widget.CoordinatorLayout>

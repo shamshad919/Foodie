@@ -49,6 +49,7 @@ public class cart extends AppCompatActivity implements View.OnClickListener{
 
     APIService mService;
     int quantity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +75,7 @@ public class cart extends AppCompatActivity implements View.OnClickListener{
         FirebaseAuth mAuth =FirebaseAuth.getInstance();
         final FirebaseUser user=mAuth.getCurrentUser();
         String uid=user.getUid();
-        DatabaseReference cartlistref=FirebaseDatabase.getInstance().getReference("user").child(uid).child("cart");
+        DatabaseReference cartlistref=FirebaseDatabase.getInstance().getReference("user").child(uid).child("cart").child("items");
         DatabaseReference foodref=FirebaseDatabase.getInstance().getReference("food_list");
 
 
