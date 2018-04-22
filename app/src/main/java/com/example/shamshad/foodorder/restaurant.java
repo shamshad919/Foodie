@@ -16,9 +16,12 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.shamshad.foodorder.Interface.ItemClickListener;
+import com.example.shamshad.foodorder.Model.Token;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 
 public class restaurant extends AppCompatActivity {
@@ -34,6 +37,11 @@ public class restaurant extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.restaurant);
         getSupportActionBar().hide();
+
+        String TAG="taggon";
+        Log.d(TAG, "shitrecieveFrom: ");
+
+        updateToken(FirebaseInstanceId.getInstance().getToken());
 
 
 
@@ -72,6 +80,15 @@ public class restaurant extends AppCompatActivity {
         };
 
         recyclerView.setAdapter(firebaseRecyclerAdapter);
+    }
+
+    private void updateToken(String token) {
+
+        FirebaseDatabase db=FirebaseDatabase.getInstance();
+        DatabaseReference tokenref=db.getReference("Tokens");
+        Token datat =new Token(token,false);
+        tokenref.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(datat);
+
     }
 
     public static class restaurant_details {

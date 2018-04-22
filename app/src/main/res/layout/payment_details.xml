@@ -62,7 +62,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/linear_layout_paymentDetails"
         android:text="Your order has been successfully processed and you will shortly receive your orders.    Thank you"
-        android:textSize="20"
+        android:textSize="20sp"
         android:textColor="@color/Black"
         android:textAlignment="center"/>
     <Button

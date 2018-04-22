@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.shamshad.foodorder.Model.Token;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInApi;
@@ -33,6 +34,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.FirebaseInstanceIdService;
 
 import static android.R.attr.data;
 import static android.R.attr.handle;
@@ -119,6 +122,10 @@ public class sign_in extends AppCompatActivity implements View.OnClickListener,G
             public void onComplete(@NonNull Task<AuthResult> task) {
                 progressDialog.dismiss();
                 if (task.isSuccessful()) {
+
+                    updateToken(FirebaseInstanceId.getInstance().getToken());
+
+
                     Toast.makeText(sign_in.this, "Login Successfully", Toast.LENGTH_SHORT).show();
                     finish();
                     startActivity(new Intent(sign_in.this, restaurant.class));
@@ -128,6 +135,15 @@ public class sign_in extends AppCompatActivity implements View.OnClickListener,G
                 }
             }
         });
+
+    }
+
+    private void updateToken(String token) {
+
+        FirebaseDatabase db=FirebaseDatabase.getInstance();
+        DatabaseReference tokenref=db.getReference("Tokens");
+        Token datat =new Token(token,false);
+        tokenref.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(datat);
 
     }
 

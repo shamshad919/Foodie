@@ -205,6 +205,8 @@ public class foodList extends AppCompatActivity implements View.OnClickListener 
                                  cartref.child("price").setValue(model.price);
                                  int total=Integer.parseInt(price)*Integer.parseInt(count);
                                  total_price.setText("Price: "+total);
+                                 cartref.child("price").setValue(price);
+
 
 
                                  /*if(foodidorder.contains(foodidkey)){
