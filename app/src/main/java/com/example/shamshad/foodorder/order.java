@@ -31,32 +31,58 @@ public class order extends AppCompatActivity {
         setContentView(R.layout.order);
         getSupportActionBar().hide();
 
-
         bottomNavigationView= (BottomNavigationView) findViewById(R.id.navigation_view);
         Menu menu=bottomNavigationView.getMenu();
         MenuItem menuItem=menu.getItem(2);
         menuItem.setChecked(true);
         navigationview_helper.enableNavigationView(context,bottomNavigationView);
 
+        int isReq = 1;
+        if (getIntent() != null) {
+            isReq = getIntent().getIntExtra("isRequest",1);
+        }
 
-        recyclerView= (RecyclerView) findViewById(R.id.recyclerview_order);
-        recyclerView.hasFixedSize();
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
-        mRef= FirebaseDatabase.getInstance().getReference("user").child(user.getUid()).child("order");
-        adapter = new FirebaseRecyclerAdapter<food_list_details,order_viewHolder>(food_list_details.class,
-                R.layout.order_listrow,
-                order_viewHolder.class,
-                mRef) {
-            @Override
-            protected void populateViewHolder(order_viewHolder viewHolder, food_list_details model, int position) {
-                viewHolder.textView.setText(model.text);
-                viewHolder.priceview.setText(model.price);
-                viewHolder.textView2.setText(model.getQuantity());
-            }
-        };
+        if(isReq==0) {
+            recyclerView = (RecyclerView) findViewById(R.id.recyclerview_order);
+            recyclerView.hasFixedSize();
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            mRef = FirebaseDatabase.getInstance().getReference("user").child(user.getUid()).child("order");
+            adapter = new FirebaseRecyclerAdapter<food_list_details, order_viewHolder>(food_list_details.class,
+                    R.layout.order_listrow,
+                    order_viewHolder.class,
+                    mRef) {
+                @Override
+                protected void populateViewHolder(order_viewHolder viewHolder, food_list_details model, int position) {
+                    viewHolder.textView.setText(model.text);
+                    viewHolder.priceview.setText(model.price);
+                    viewHolder.textView2.setText(model.getQuantity());
+                }
+            };
 
-        recyclerView.setAdapter(adapter);
+            recyclerView.setAdapter(adapter);
+
+        }
+        if(isReq==1){
+            recyclerView = (RecyclerView) findViewById(R.id.recyclerview_order);
+            recyclerView.hasFixedSize();
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            mRef = FirebaseDatabase.getInstance().getReference("user").child(user.getUid()).child("items");
+            adapter = new FirebaseRecyclerAdapter<food_list_details, order_viewHolder>(food_list_details.class,
+                    R.layout.order_listrow,
+                    order_viewHolder.class,
+                    mRef) {
+                @Override
+                protected void populateViewHolder(order_viewHolder viewHolder, food_list_details model, int position) {
+                    viewHolder.textView.setText(model.text);
+                    viewHolder.priceview.setText(model.price);
+                    viewHolder.textView2.setText(model.getQuantity());
+                }
+            };
+
+            recyclerView.setAdapter(adapter);
+        }
 
     }
 }

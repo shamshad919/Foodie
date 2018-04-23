@@ -54,6 +54,7 @@ public class account_details extends AppCompatActivity implements View.OnClickLi
         cart.setOnClickListener(this);
         address.setOnClickListener(this);
         order.setOnClickListener(this);
+        requests.setOnClickListener(this);
 
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -102,7 +103,12 @@ public class account_details extends AppCompatActivity implements View.OnClickLi
             startActivity(new Intent(account_details.this,address.class));
         }
         if(v==order){
-            startActivity(new Intent(account_details.this,order.class));
+            Intent intent=new Intent(account_details.this,order.class);
+            intent.putExtra("isRequest",0);
+            startActivity(intent);
+        }
+        if(v==requests){
+            startActivity(new Intent(account_details.this,requestList.class));
         }
     }
 

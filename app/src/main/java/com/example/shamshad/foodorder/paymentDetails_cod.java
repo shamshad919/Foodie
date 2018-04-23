@@ -49,17 +49,32 @@ public class paymentDetails_cod extends AppCompatActivity {
                 String restname= (String) dataSnapshot.child("user").child(uid).child("cart").child("restaurant").getValue();
                 String address= (String) dataSnapshot.child("user").child(uid).child("cart").child("address").getValue();
                 String rid= (String) dataSnapshot.child("restaurants").child(restname).child("rid").getValue();
-                final DatabaseReference rest=FirebaseDatabase.getInstance().getReference("user").child(rid).child("requests").push();
-                rest.child("Address").setValue(address);
+                //final DatabaseReference rest=FirebaseDatabase.getInstance().getReference("user").child(rid).child("requests").push();
+                //DatabaseReference addr=FirebaseDatabase.getInstance().getReference("user").child(rid).child("adreses").push();
+                DatabaseReference singleaddr=FirebaseDatabase.getInstance().getReference("user").child(rid);
+                singleaddr.child("single_addr").setValue(address);
+                //rest.child("Adres").setValue(address);
+                //addr.child("Adres").setValue(address);
+                //addr.child("pushidkey").setValue(rest.getKey());
 
-                rest.child("items").setValue(dataSnapshot.child("user").child(uid).child("cart").child("items").getValue(), new DatabaseReference.CompletionListener() {
+                /*rest.child("items").setValue(dataSnapshot.child("user").child(uid).child("cart").child("items").getValue(), new DatabaseReference.CompletionListener() {
                     @Override
                     public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                         if (databaseError != null) {
                             System.out.println("Copy failed");
                         } else {
                             System.out.println("Success");
+                        }
 
+                    }
+                });*/
+                singleaddr.child("items").setValue(dataSnapshot.child("user").child(uid).child("cart").child("items").getValue(), new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                        if (databaseError != null) {
+                            System.out.println("Copy failed");
+                        } else {
+                            System.out.println("Success");
                         }
 
                     }
