@@ -11,6 +11,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.shamshad.foodorder.Common.Common;
+import com.example.shamshad.foodorder.Model.MyResponse;
+import com.example.shamshad.foodorder.Model.Notification;
+import com.example.shamshad.foodorder.Model.Sender;
+import com.example.shamshad.foodorder.Model.Token;
+import com.example.shamshad.foodorder.Remote.APIService;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -19,6 +25,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.RemoteMessage;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
 import com.paypal.android.sdk.payments.PayPalPayment;
 import com.paypal.android.sdk.payments.PayPalPaymentDetails;
@@ -31,6 +38,11 @@ import org.w3c.dom.Text;
 
 import java.math.BigDecimal;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static android.R.attr.data;
 import static android.R.attr.process;
 import static com.example.shamshad.foodorder.R.id.add;
 import static com.example.shamshad.foodorder.R.id.start;
@@ -49,12 +61,15 @@ public class order_details extends AppCompatActivity {
     String total_price;
 
 
+    APIService mService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order_details);
         getSupportActionBar().hide();
 
+        mService= Common.getFCMClient();
 
         final String delivery_address = getIntent().getStringExtra("delivery address");
 
@@ -73,6 +88,10 @@ public class order_details extends AppCompatActivity {
         place_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                String localkey="Localkey";
+                sendOrderStatusToUser(localkey);
+
                Intent intent=new Intent(order_details.this,payment_selection.class);
                intent.putExtra("Amount",total_price);
                 intent.putExtra("delivery address",delivery_address);
@@ -81,6 +100,46 @@ public class order_details extends AppCompatActivity {
         });
 
 
+    }
+
+    private void sendOrderStatusToUser(final String key) {
+        DatabaseReference tokenref=FirebaseDatabase.getInstance().getReference("Tokens");
+        tokenref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot postSnapshot:dataSnapshot.getChildren())
+                {
+                    Token token=postSnapshot.getValue(Token.class);
+                    Notification notification=new Notification("ShaunDEV","New order "+key);
+                    Sender content=new Sender(token.getToken(),notification);
+                    mService.sendNotification(content)
+                            .enqueue(new Callback<MyResponse>() {
+                                @Override
+                                public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
+                                    if(response.body().success==1)
+                                    {
+                                        Toast.makeText(order_details.this,"Order updated",Toast.LENGTH_SHORT).show();
+                                    }
+                                    else {
+                                        Toast.makeText(order_details.this,"failed to send notification!!!",Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<MyResponse> call, Throwable t) {
+
+                                   Log.e("Error noti",t.getMessage());
+                                }
+                            });
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
 }

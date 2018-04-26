@@ -14,4 +14,10 @@ public class Common {
     {
         return RetrofitClient.getClient(BASE_URL).create(APIService.class);
     }
+    public static APIService getFCMClient(){
+        return RetrofitClient.getClient(BASE_URL).create(APIService.class);
+    }
+
+
+
 }
