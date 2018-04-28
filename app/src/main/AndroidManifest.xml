@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.shamshad.foodorder">
+    package="com.firefistace.shamshad.foodorder">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="com.firefistace.shamshad.foodorder.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,24 +21,24 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".sign_in"
+            android:name="com.firefistace.shamshad.foodorder.sign_in"
             android:noHistory="true" />
         <activity
-            android:name=".sign_up"
+            android:name="com.firefistace.shamshad.foodorder.sign_up"
             android:noHistory="true" />
-        <activity android:name=".restaurant" />
-        <activity android:name=".foodList" />
-        <activity android:name=".fooddetails" />
-        <activity android:name=".cart" />
-        <activity android:name=".account_details" />
-        <activity android:name=".address" />
-        <activity android:name=".address_selection" />
-        <activity android:name=".order_details" />
-        <activity android:name=".PaymentDetails" />
-        <activity android:name=".payment_selection" />
-        <activity android:name=".paymentDetails_cod" />
-        <activity android:name=".order" />
-        <activity android:name=".requestList"></activity>
+        <activity android:name="com.firefistace.shamshad.foodorder.restaurant" />
+        <activity android:name="com.firefistace.shamshad.foodorder.foodList" />
+        <activity android:name="com.firefistace.shamshad.foodorder.fooddetails" />
+        <activity android:name="com.firefistace.shamshad.foodorder.cart" />
+        <activity android:name="com.firefistace.shamshad.foodorder.account_details" />
+        <activity android:name="com.firefistace.shamshad.foodorder.address" />
+        <activity android:name="com.firefistace.shamshad.foodorder.address_selection" />
+        <activity android:name="com.firefistace.shamshad.foodorder.order_details" />
+        <activity android:name="com.firefistace.shamshad.foodorder.PaymentDetails" />
+        <activity android:name="com.firefistace.shamshad.foodorder.payment_selection" />
+        <activity android:name="com.firefistace.shamshad.foodorder.paymentDetails_cod" />
+        <activity android:name="com.firefistace.shamshad.foodorder.order" />
+        <activity android:name="com.firefistace.shamshad.foodorder.requestList"></activity>
     </application>
 
 </manifest>

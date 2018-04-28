@@ -19,7 +19,7 @@
         app:cardCornerRadius="20dp"
         app:cardElevation="10dp"
         android:id="@+id/cardview_address"
-        android:layout_toEndOf="@+id/radioButton">
+        >
         <TextView
             android:id="@+id/address_textview_recycler"
             android:layout_width="280dp"
@@ -31,9 +31,5 @@
             android:padding="5dp"
             android:text="Hello world"
             android:textSize="15sp" />
-
     </android.support.v7.widget.CardView>
-
-
-
 </RelativeLayout>

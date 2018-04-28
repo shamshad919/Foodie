@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.shamshad.foodorder.payment_selection">
+    tools:context="com.firefistace.shamshad.foodorder.payment_selection">
 
     <RelativeLayout
         android:layout_width="match_parent"
